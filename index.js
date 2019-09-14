@@ -139,6 +139,25 @@ function createExtension(name) {
   );
 
   console.log(`Success! Created ${name} at ${root}`);
+  console.log('Inside that directory, you can run below commands:');
+  console.log();
+  console.log(chalk.cyan(`  ${command} run watch`));
+  console.log('    Listens for files changes and rebuilds automatically.');
+  console.log();
+  console.log(chalk.cyan(`  ${command} run build`));
+  console.log('    Bundles the app into static files for Chrome store.');
+  console.log();
+  console.log('We suggest that you begin by typing:');
+  console.log();
+  console.log(`  1. ${chalk.cyan('cd')} ${name}`);
+  console.log(`  2. Run ${chalk.cyan(`${command} run watch`)}`);
+  console.log(`  3. Open ${chalk.cyan('chrome://extensions')}`);
+  console.log(`  4. Check the ${chalk.cyan('Developer mode')} checkbox`);
+  console.log(
+    `  5. Click on the ${chalk.cyan('Load unpacked extension')} button`
+  );
+  console.log(`  6. Select the folder ${chalk.cyan(name + '/build')}`);
+  console.log();
 }
 
 createExtension(projectName);

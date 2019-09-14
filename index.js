@@ -7,6 +7,8 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 const commander = require('commander');
 
+const { checkAppName } = require('./utils/name');
+
 let projectName;
 
 const program = new commander.Command('chrome-extension-cli')
@@ -40,6 +42,7 @@ if (typeof projectName === 'undefined') {
 function createExtension(name) {
   const root = path.resolve(name);
 
+  checkAppName(name);
   fs.ensureDirSync(name);
 
   console.log(`Creating a new Chrome extension in ${chalk.green(root)}`);

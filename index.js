@@ -7,12 +7,13 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 const commander = require('commander');
 
+const packageFile = require('./package.json');
 const { checkAppName } = require('./utils/name');
 
 let projectName;
 
-const program = new commander.Command('chrome-extension-cli')
-  .version('0.1.0')
+const program = new commander.Command(packageFile.name)
+  .version(packageFile.version)
   .arguments('<project-directory>')
   .usage(`${chalk.green('<project-directory>')} [options]`)
   .action(name => {

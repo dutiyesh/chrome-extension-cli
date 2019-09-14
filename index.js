@@ -63,6 +63,9 @@ function createExtension(name) {
   //   JSON.stringify(appPackage, null, 2)
   // );
 
+  // Copy template files to project directory
+  fs.copySync(path.resolve(__dirname, 'templates', 'popup'), root);
+
   console.log(`Success! Created ${name} at ${root}`);
 }
 

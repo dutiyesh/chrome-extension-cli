@@ -66,6 +66,9 @@ function createExtension(name) {
   // Copy template files to project directory
   fs.copySync(path.resolve(__dirname, 'templates', 'popup'), root);
 
+  // Copy common webpack configuration file
+  fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));
+
   console.log(`Success! Created ${name} at ${root}`);
 }
 

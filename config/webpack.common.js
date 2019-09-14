@@ -6,7 +6,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const PATHS = require('./paths');
 
-// A common webpack configuration
+// To re-use webpack configuration across templates,
+// CLI maintains a common webpack configuration file - `webpack.common.js`.
+// Whenever user creates an extension, CLI adds `webpack.common.js` file
+// in template's `config` folder
 const common = {
   output: {
     // the build folder to output bundles and assets in.

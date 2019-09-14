@@ -58,10 +58,10 @@ function createExtension(name) {
   };
 
   // Copy package file to project directory
-  fs.writeFileSync(
-    path.join(root, 'package.json'),
-    JSON.stringify(appPackage, null, 2)
-  );
+  // fs.writeFileSync(
+  //   path.join(root, 'package.json'),
+  //   JSON.stringify(appPackage, null, 2)
+  // );
 
   console.log(`Success! Created ${name} at ${root}`);
 }

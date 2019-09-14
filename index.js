@@ -9,7 +9,7 @@ const spawn = require('cross-spawn');
 const commander = require('commander');
 
 const packageFile = require('./package.json');
-const { checkAppName } = require('./utils/name');
+const { checkAppName, prettifyAppName } = require('./utils/name');
 
 let projectName;
 
@@ -50,11 +50,15 @@ function createExtension(name) {
   console.log(`Creating a new Chrome extension in ${chalk.green(root)}`);
   console.log();
 
+  const appDetails = {
+    version: '0.1.0',
+    description: 'My Chrome Extension',
+  };
+
   // Setup the package file
   let appPackage = {
     name: name,
-    version: '0.1.0',
-    description: 'My Chrome Extension',
+    ...appDetails,
     private: true,
   };
 
@@ -105,6 +109,34 @@ function createExtension(name) {
 
   // Copy common webpack configuration file
   fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));
+
+  // Setup the manifest file
+  const manifestDetails = {
+    name: prettifyAppName(name),
+    ...appDetails,
+  };
+
+  let appManifest = {
+    manifest_version: 2,
+    ...manifestDetails,
+    icons: {
+      16: 'icons/icon_16.png',
+      32: 'icons/icon_32.png',
+      48: 'icons/icon_48.png',
+      128: 'icons/icon_128.png',
+    },
+    browser_action: {
+      default_title: manifestDetails.name,
+      default_popup: 'popup.html',
+    },
+    permissions: ['storage'],
+  };
+
+  // Create manifest file in project directory
+  fs.writeFileSync(
+    path.join(root, 'public', 'manifest.json'),
+    JSON.stringify(appManifest, null, 2)
+  );
 
   console.log(`Success! Created ${name} at ${root}`);
 }

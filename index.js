@@ -2,6 +2,8 @@
 
 'use strict';
 
+const path = require('path');
+const fs = require('fs-extra');
 const chalk = require('chalk');
 const commander = require('commander');
 
@@ -35,5 +37,29 @@ if (typeof projectName === 'undefined') {
   process.exit(1);
 }
 
-console.log('The CLI for your next Chrome Extension. 🚀');
-console.log(`Project name: ${projectName}`);
+function createExtension(name) {
+  const root = path.resolve(name);
+
+  fs.ensureDirSync(name);
+
+  console.log(`Creating a new Chrome extension in ${chalk.green(root)}`);
+  console.log();
+
+  // Setup the package file
+  let appPackage = {
+    name: name,
+    version: '0.1.0',
+    description: 'My Chrome Extension',
+    private: true,
+  };
+
+  // Copy package file to project directory
+  fs.writeFileSync(
+    path.join(root, 'package.json'),
+    JSON.stringify(appPackage, null, 2)
+  );
+
+  console.log(`Success! Created ${name} at ${root}`);
+}
+
+createExtension(projectName);

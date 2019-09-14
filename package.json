@@ -6,11 +6,17 @@
   "bin": {
     "chrome-extension-cli": "index.js"
   },
+  "scripts": {
+    "format": "prettier --single-quote --trailing-comma es5 --write 'index.js'"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^3.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
   }
 }

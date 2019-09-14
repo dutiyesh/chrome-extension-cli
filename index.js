@@ -5,6 +5,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const chalk = require('chalk');
+const spawn = require('cross-spawn');
 const commander = require('commander');
 
 const packageFile = require('./package.json');
@@ -57,11 +58,47 @@ function createExtension(name) {
     private: true,
   };
 
-  // Copy package file to project directory
-  // fs.writeFileSync(
-  //   path.join(root, 'package.json'),
-  //   JSON.stringify(appPackage, null, 2)
-  // );
+  appPackage.scripts = {
+    watch:
+      'webpack --mode=development --watch --config config/webpack.config.js',
+    build: 'webpack --mode=production --config config/webpack.config.js',
+  };
+
+  // Create package file in project directory
+  fs.writeFileSync(
+    path.join(root, 'package.json'),
+    JSON.stringify(appPackage, null, 2)
+  );
+
+  let command = 'npm';
+  let args = ['install', '--save-dev'];
+
+  // Add devDependencies
+  args.push(
+    'webpack',
+    'webpack-cli',
+    'webpack-merge',
+    'copy-webpack-plugin',
+    'size-plugin',
+    'mini-css-extract-plugin',
+    'css-loader',
+    'file-loader'
+  );
+
+  console.log('Installing packages. This might take a couple of minutes.');
+  console.log(
+    `Installing ${chalk.cyan('webpack')}, ${chalk.cyan(
+      'webpack-cli'
+    )} and few more...`
+  );
+  console.log();
+
+  // Install package dependencies
+  const proc = spawn.sync(command, args, { cwd: root, stdio: 'inherit' });
+  if (proc.status !== 0) {
+    console.error(`\`${command} ${args.join(' ')}\` failed`);
+    return;
+  }
 
   // Copy template files to project directory
   fs.copySync(path.resolve(__dirname, 'templates', 'popup'), root);

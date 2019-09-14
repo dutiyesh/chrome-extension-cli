@@ -15,6 +15,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
+    "cross-spawn": "^7.0.0",
     "fs-extra": "^8.1.0",
     "validate-npm-package-name": "^3.0.0"
   },

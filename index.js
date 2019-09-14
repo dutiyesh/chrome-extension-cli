@@ -15,5 +15,11 @@ const program = new commander.Command('chrome-extension-cli')
   })
   .parse(process.argv);
 
+// Exit from the process if no project name is provided
+if (typeof projectName === 'undefined') {
+  console.error('Please specify the project directory');
+  process.exit(1);
+}
+
 console.log('The CLI for your next Chrome Extension. 🚀');
 console.log(`Project name: ${projectName}`);

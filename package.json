@@ -7,7 +7,7 @@
     "chrome-extension-cli": "index.js"
   },
   "scripts": {
-    "format": "prettier --single-quote --trailing-comma es5 --write 'index.js' '{utils,templates}/**/*.js'"
+    "format": "prettier --single-quote --trailing-comma es5 --write 'index.js' '{config,utils,templates}/**/*.js'"
   },
   "keywords": [],
   "author": "",

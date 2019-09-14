@@ -1,0 +1,12 @@
+{
+  "name": "chrome-extension-cli",
+  "version": "0.1.0",
+  "description": "The CLI for your next Chrome Extension.",
+  "main": "index.js",
+  "bin": {
+    "chrome-extension-cli": "index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

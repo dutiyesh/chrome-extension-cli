@@ -16,4 +16,4 @@ const program = new commander.Command('chrome-extension-cli')
   .parse(process.argv);
 
 console.log('The CLI for your next Chrome Extension. 🚀');
-console.log(`Poject name: ${projectName}`);
+console.log(`Project name: ${projectName}`);

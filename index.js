@@ -10,6 +10,7 @@ const commander = require('commander');
 
 const packageFile = require('./package.json');
 const { checkAppName, prettifyAppName } = require('./utils/name');
+const generateReadme = require('./scripts/readme');
 const tryGitInit = require('./scripts/git-init');
 
 let projectName;
@@ -138,6 +139,12 @@ function createExtension(name) {
     path.join(root, 'public', 'manifest.json'),
     JSON.stringify(appManifest, null, 2)
   );
+
+  // Generate a README file
+  if (generateReadme(manifestDetails, root)) {
+    console.log('Generated a README file.');
+    console.log();
+  }
 
   // Initialize a git repository
   if (tryGitInit(root, name)) {

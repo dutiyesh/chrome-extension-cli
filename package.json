@@ -2,6 +2,7 @@
   "name": "chrome-extension-cli",
   "version": "0.1.0",
   "description": "The CLI for your next Chrome Extension.",
+  "repository": "dutiyesh/chrome-extension-cli",
   "main": "index.js",
   "bin": {
     "chrome-extension-cli": "index.js"
@@ -9,8 +10,30 @@
   "scripts": {
     "format": "prettier --single-quote --trailing-comma es5 --write 'index.js' '{config,scripts,utils,templates}/**/*.js'"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "chrome",
+    "extension",
+    "cli",
+    "javascript",
+    "node",
+    "webpack",
+    "google",
+    "template",
+    "popup",
+    "override-page",
+    "devtools"
+  ],
+  "author": {
+    "name": "Dutiyesh Salunkhe",
+    "email": "dutiyesh@gmail.com",
+    "url": "http://dutiyesh.com"
+  },
+  "bugs": {
+    "url": "https://github.com/dutiyesh/chrome-extension-cli/issues"
+  },
+  "engines": {
+    "node": ">=8"
+  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",

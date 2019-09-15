@@ -114,6 +114,8 @@ With Chrome Extension CLI you can built any of the below extensions:
 - **Override page**: Override default page like New Tab, Bookmarks, or History page.
 - **DevTools**: Add features to Chrome Developer Tools.
 
+See the [templates screenshots](templates/README.md).
+
 ## CLI options
 
 **chrome-extension-cli my-extension --override-page**

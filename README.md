@@ -19,6 +19,11 @@ Then follow these instructions to see your extension:
 
 When you're ready to publish to Chrome Web Store, create a minified bundle with `npm run build` and then zip the `build` folder.
 
+<div align="center">
+  <img width="600" height="413" src="assets/installation.png" alt="Chrome Extension CLI">
+  <img width="600" height="413" src="assets/development.png" alt="Chrome Extension CLI">
+</div>
+
 ### Get Started Immediately
 
 You **don’t** need to install or configure Webpack.<br>

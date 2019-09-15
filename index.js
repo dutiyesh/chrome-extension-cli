@@ -10,6 +10,7 @@ const commander = require('commander');
 
 const packageFile = require('./package.json');
 const { checkAppName, prettifyAppName } = require('./utils/name');
+const tryGitInit = require('./scripts/git-init');
 
 let projectName;
 
@@ -137,6 +138,12 @@ function createExtension(name) {
     path.join(root, 'public', 'manifest.json'),
     JSON.stringify(appManifest, null, 2)
   );
+
+  // Initialize a git repository
+  if (tryGitInit(root, name)) {
+    console.log('Initialized a git repository.');
+    console.log();
+  }
 
   console.log(`Success! Created ${name} at ${root}`);
   console.log('Inside that directory, you can run below commands:');

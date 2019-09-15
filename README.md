@@ -148,4 +148,6 @@ Chrome Extension CLI is open source software [licensed as MIT](LICENSE).
 
 ---
 
-_Many thanks to [create-react-app](https://github.com/facebook/create-react-app/blob/master/README.md) for the inspiration with this readme file_
+_Many thanks to [create-react-app](https://github.com/facebook/create-react-app/blob/master/README.md) for the inspiration with this readme file._
+
+_Jupiter Icon used in templates made by [Freepik](https://www.freepik.com/home) from [www.flaticon.com](http://www.flaticon.com/)._

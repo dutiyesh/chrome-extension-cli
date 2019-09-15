@@ -27,6 +27,7 @@ const program = new commander.Command(packageFile.name)
     '--override-page [page-name]',
     'override default page like New Tab, Bookmarks, or History page'
   )
+  .option('--devtools', 'add features to Chrome Developer Tools')
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })
@@ -78,13 +79,28 @@ function logOverridePageError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage }) {
+function logOptionsConflictError() {
+  console.error(
+    `${chalk.red(
+      'You have passed both "--override-page" and "--devtools" options'
+    )}`
+  );
+  console.log(`  ${chalk.cyan('Only pass one of the option')}`);
+  console.log('');
+  process.exit(1);
+}
+
+function createExtension(name, { overridePage, devtools }) {
   const root = path.resolve(name);
   let overridePageName;
 
   if (overridePage) {
     if (isOverridePageNameValid(overridePage)) {
       overridePageName = overridePage === true ? 'newtab' : overridePage;
+
+      if (devtools) {
+        logOptionsConflictError();
+      }
     } else {
       logOverridePageError();
     }
@@ -154,6 +170,8 @@ function createExtension(name, { overridePage }) {
   let templateName;
   if (overridePageName) {
     templateName = 'override-page';
+  } else if (devtools) {
+    templateName = 'devtools';
   } else {
     templateName = 'popup';
   }
@@ -190,7 +208,12 @@ function createExtension(name, { overridePage }) {
       chrome_url_overrides: {
         [overridePageName]: 'index.html',
       },
-    }
+    };
+  } else if (devtools) {
+    appManifest = {
+      ...appManifest,
+      devtools_page: 'devtools.html',
+    };
   } else {
     appManifest = {
       ...appManifest,
@@ -250,5 +273,6 @@ function createExtension(name, { overridePage }) {
 }
 
 createExtension(projectName, {
-  overridePage: program.overridePage
+  overridePage: program.overridePage,
+  devtools: program.devtools,
 });

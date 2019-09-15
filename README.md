@@ -127,6 +127,10 @@ chrome-extension-cli my-extension --override-page=history      // Override Histo
 
 Creates a Panel inside developer tools.
 
+## Contributing
+
+See the [contribution guide](CONTRIBUTING.md) and join the contributors!
+
 ---
 
 _Many thanks to [create-react-app](https://github.com/facebook/create-react-app/blob/master/README.md) for the inspiration with this readme file_

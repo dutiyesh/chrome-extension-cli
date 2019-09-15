@@ -135,6 +135,10 @@ See the [contribution guide](CONTRIBUTING.md) and join the contributors!
 
 See the [FAQs](FAQ.md).
 
+## License
+
+Chrome Extension CLI is open source software [licensed as MIT](LICENSE).
+
 ---
 
 _Many thanks to [create-react-app](https://github.com/facebook/create-react-app/blob/master/README.md) for the inspiration with this readme file_

@@ -131,6 +131,10 @@ Creates a Panel inside developer tools.
 
 See the [contribution guide](CONTRIBUTING.md) and join the contributors!
 
+## FAQs
+
+See the [FAQs](FAQ.md).
+
 ---
 
 _Many thanks to [create-react-app](https://github.com/facebook/create-react-app/blob/master/README.md) for the inspiration with this readme file_

@@ -132,6 +132,17 @@ function createExtension(name) {
       default_popup: 'popup.html',
     },
     permissions: ['storage'],
+    content_scripts: [
+      {
+        matches: ['<all_urls>'],
+        run_at: 'document_idle',
+        js: ['contentScript.js'],
+      },
+    ],
+    background: {
+      scripts: ['background.js'],
+      persistent: false,
+    },
   };
 
   // Create manifest file in project directory

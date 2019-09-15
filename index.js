@@ -14,6 +14,7 @@ const generateReadme = require('./scripts/readme');
 const tryGitInit = require('./scripts/git-init');
 
 let projectName;
+const OVERRIDE_PAGES = ['newtab', 'bookmarks', 'history'];
 
 const program = new commander.Command(packageFile.name)
   .version(packageFile.version)
@@ -22,6 +23,10 @@ const program = new commander.Command(packageFile.name)
   .action(name => {
     projectName = name;
   })
+  .option(
+    '--override-page [page-name]',
+    'override default page like New Tab, Bookmarks, or History page'
+  )
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })
@@ -43,8 +48,47 @@ if (typeof projectName === 'undefined') {
   process.exit(1);
 }
 
-function createExtension(name) {
+function isOverridePageNameValid(name) {
+  if (name === true || OVERRIDE_PAGES.includes(name)) {
+    return true;
+  }
+
+  return false;
+}
+
+function logOverridePageError() {
+  console.error(
+    `${chalk.red('Invalid page name passed to option:')} ${chalk.cyan(
+      '--override-page'
+    )}`
+  );
+  console.log();
+  console.log(
+    `You can pass page name as ${chalk.cyan('newtab')}, ${chalk.cyan(
+      'bookmarks'
+    )} or ${chalk.cyan('history')}.`
+  );
+  console.log();
+  console.log('For example:');
+  console.log(
+    `  ${chalk.cyan(program.name())} ${chalk.green(
+      'my-extension'
+    )} ${chalk.cyan('--override-page')} ${chalk.green('newtab')}`
+  );
+  process.exit(1);
+}
+
+function createExtension(name, { overridePage }) {
   const root = path.resolve(name);
+  let overridePageName;
+
+  if (overridePage) {
+    if (isOverridePageNameValid(overridePage)) {
+      overridePageName = overridePage === true ? 'newtab' : overridePage;
+    } else {
+      logOverridePageError();
+    }
+  }
 
   checkAppName(name);
   fs.ensureDirSync(name);
@@ -107,7 +151,14 @@ function createExtension(name) {
   }
 
   // Copy template files to project directory
-  fs.copySync(path.resolve(__dirname, 'templates', 'popup'), root);
+  let templateName;
+  if (overridePageName) {
+    templateName = 'override-page';
+  } else {
+    templateName = 'popup';
+  }
+
+  fs.copySync(path.resolve(__dirname, 'templates', templateName), root);
 
   // Copy common webpack configuration file
   fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));
@@ -127,23 +178,36 @@ function createExtension(name) {
       48: 'icons/icon_48.png',
       128: 'icons/icon_128.png',
     },
-    browser_action: {
-      default_title: manifestDetails.name,
-      default_popup: 'popup.html',
-    },
-    permissions: ['storage'],
-    content_scripts: [
-      {
-        matches: ['<all_urls>'],
-        run_at: 'document_idle',
-        js: ['contentScript.js'],
-      },
-    ],
     background: {
       scripts: ['background.js'],
       persistent: false,
     },
   };
+
+  if (overridePageName) {
+    appManifest = {
+      ...appManifest,
+      chrome_url_overrides: {
+        [overridePageName]: 'index.html',
+      },
+    }
+  } else {
+    appManifest = {
+      ...appManifest,
+      browser_action: {
+        default_title: manifestDetails.name,
+        default_popup: 'popup.html',
+      },
+      permissions: ['storage'],
+      content_scripts: [
+        {
+          matches: ['<all_urls>'],
+          run_at: 'document_idle',
+          js: ['contentScript.js'],
+        },
+      ],
+    };
+  }
 
   // Create manifest file in project directory
   fs.writeFileSync(
@@ -185,4 +249,6 @@ function createExtension(name) {
   console.log();
 }
 
-createExtension(projectName);
+createExtension(projectName, {
+  overridePage: program.overridePage
+});

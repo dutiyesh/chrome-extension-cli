@@ -1,0 +1,63 @@
+/* normalize css starts here */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* normalize css ends here */
+
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-image: linear-gradient(to right, #EC6EAD, #3494E6);
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    text-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.day {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.clock {
+    font-size: 80px;
+    font-weight: 600;
+}
+
+.title {
+    margin-top: 5px;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+code {
+    font-size: 12px;
+    font-family: inherit;
+    background-color: rgba(255, 255, 255, .1);
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.divider {
+    margin: 20px auto;
+    width: 50px;
+    border: .5px dashed #fff;
+    opacity: .2;
+}

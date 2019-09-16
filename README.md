@@ -118,19 +118,18 @@ See the [templates screenshots](templates/README.md).
 
 ## CLI options
 
-**chrome-extension-cli my-extension --override-page**
+#### `chrome-extension-cli my-extension --override-page`
 
 Creates an extension that overrides default New Tab page.<br>
 You can also pass other values to `--override-page` option to override other default pages like Bookmarks and History page.
 
 ```
 chrome-extension-cli my-extension --override-page              // Override New Tab page
-
 chrome-extension-cli my-extension --override-page=bookmarks    // Override Bookmarks page
 chrome-extension-cli my-extension --override-page=history      // Override History page
 ```
 
-**chrome-extension-cli my-extension --devtools**
+#### `chrome-extension-cli my-extension --devtools`
 
 Creates a Panel inside developer tools.
 

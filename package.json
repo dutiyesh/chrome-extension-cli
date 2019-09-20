@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The CLI for your next Chrome Extension.",
   "repository": "dutiyesh/chrome-extension-cli",
   "main": "index.js",

@@ -142,7 +142,7 @@ Add features to Chrome Developer Tools.
   </figure>
 </div>
 
-See the [templates screenshots](templates/README.md).
+More information about [templates](templates/README.md).
 
 ## CLI options
 

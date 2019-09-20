@@ -110,9 +110,37 @@ Your environment will have everything you need to build a Chrome Extension:
 
 With Chrome Extension CLI you can built any of the below extensions:
 
-- **Popup**: Add features to Active Tab.
-- **Override page**: Override default page like New Tab, Bookmarks, or History page.
-- **DevTools**: Add features to Chrome Developer Tools.
+### Popup
+
+Add features to Active Tab.
+
+<div align="center">
+  <figure>
+    <img width="500" height="322" src="./assets/template-popup.png" alt="Popup template">
+  </figure>
+</div>
+
+
+### Override page
+
+Override default page like New Tab, Bookmarks, or History page.
+
+<div align="center">
+  <figure>
+    <img width="500" height="322" src="./assets/template-page.png" alt="Override page template">
+  </figure>
+</div>
+
+
+### DevTools
+
+Add features to Chrome Developer Tools.
+
+<div align="center">
+  <figure>
+    <img width="500" height="322" src="./assets/template-panel.png" alt="DevTools Panel template">
+  </figure>
+</div>
 
 See the [templates screenshots](templates/README.md).
 

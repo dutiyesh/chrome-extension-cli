@@ -181,6 +181,15 @@ function createExtension(name, { overridePage, devtools }) {
   // Copy common webpack configuration file
   fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));
 
+  // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
+  // See: https://github.com/npm/npm/issues/1862
+  // Source: https://github.com/facebook/create-react-app/blob/47e9e2c7a07bfe60b52011cf71de5ca33bdeb6e3/packages/react-scripts/scripts/init.js#L138
+  fs.moveSync(
+    path.join(root, 'gitignore'),
+    path.join(root, '.gitignore'),
+    []
+  );
+
   // Setup the manifest file
   const manifestDetails = {
     name: prettifyAppName(name),

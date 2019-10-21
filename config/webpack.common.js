@@ -48,6 +48,12 @@ const common = {
   plugins: [
     // Print file sizes
     new SizePlugin(),
+    // Copy browser-polyfill.js for cross browser compability
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js'
+      }
+    ]),
     // Copy static assets from `public` folder to `build` folder
     new CopyWebpackPlugin([
       {

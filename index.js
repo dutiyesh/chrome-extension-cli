@@ -28,7 +28,7 @@ const program = new commander.Command(packageFile.name)
     'override default page like New Tab, Bookmarks, or History page'
   )
   .option('--devtools', 'add features to Chrome Developer Tools')
-  .option('--webextension', `create a cross-rowser compatible WebExtension with ${chalk.blue(webextension-polyfill)}`)
+  .option('--webextension', `create a cross-rowser compatible WebExtension with ${chalk.blue('webextension-polyfill')}`)
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })
@@ -149,7 +149,8 @@ function createExtension(name, { overridePage, devtools }) {
     'size-plugin',
     'mini-css-extract-plugin',
     'css-loader',
-    'file-loader'
+    'file-loader',
+    'webextension-polyfill'
   );
 
   console.log('Installing packages. This might take a couple of minutes.');
@@ -236,7 +237,7 @@ function createExtension(name, { overridePage, devtools }) {
         {
           matches: ['<all_urls>'],
           run_at: 'document_idle',
-          js: ['contentScript.js'],
+          js: ['browser-polyfill.js', 'contentScript.js'],
         },
       ],
     };

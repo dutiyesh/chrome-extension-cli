@@ -28,7 +28,7 @@ const program = new commander.Command(packageFile.name)
     'override default page like New Tab, Bookmarks, or History page'
   )
   .option('--devtools', 'add features to Chrome Developer Tools')
-  .option('--webextension', `create a cross-rowser compatible WebExtension with ${chalk.blue('webextension-polyfill')}`)
+  .option('--no-cross-browser', `the generated project will not be cross-browser compatible`)
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })

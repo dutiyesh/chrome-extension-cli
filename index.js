@@ -208,7 +208,7 @@ function createExtension(name, { overridePage, devtools }) {
       128: 'icons/icon_128.png',
     },
     background: {
-      scripts: ['background.js'],
+      scripts: ['browser-polyfill.js', 'background.js'],
       persistent: false,
     },
   };

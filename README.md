@@ -171,6 +171,10 @@ chrome-extension-cli my-extension --override-page=history      // Override Histo
 
 Creates a Panel inside developer tools.
 
+#### `chrome-extension-cli my-extension  --no-cross-browser`
+
+The generated project will not be cross-browser compatible by default.
+
 ## Contributing
 
 See the [contribution guide](CONTRIBUTING.md) and join the contributors!

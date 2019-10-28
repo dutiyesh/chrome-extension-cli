@@ -12,6 +12,7 @@ const packageFile = require('./package.json');
 const { checkAppName, prettifyAppName } = require('./utils/name');
 const generateReadme = require('./scripts/readme');
 const tryGitInit = require('./scripts/git-init');
+const browserPolyfillFilename = 'browser-polyfill.js';
 
 let projectName;
 const OVERRIDE_PAGES = ['newtab', 'bookmarks', 'history'];
@@ -91,7 +92,7 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }) {
+function createExtension(name, { overridePage, devtools, crossBrowser }) {
   const root = path.resolve(name);
   let overridePageName;
 
@@ -127,8 +128,8 @@ function createExtension(name, { overridePage, devtools }) {
 
   appPackage.scripts = {
     watch:
-      'webpack --mode=development --watch --config config/webpack.config.js',
-    build: 'webpack --mode=production --config config/webpack.config.js',
+      `webpack --mode=development --env.CROSS_BROWSER=${crossBrowser} --watch --config config/webpack.config.js`,
+    build: `webpack --mode=production --env.CROSS_BROWSER=${crossBrowser} --config config/webpack.config.js`,
   };
 
   // Create package file in project directory
@@ -208,7 +209,7 @@ function createExtension(name, { overridePage, devtools }) {
       128: 'icons/icon_128.png',
     },
     background: {
-      scripts: ['browser-polyfill.js', 'background.js'],
+      scripts: ['background.js'],
       persistent: false,
     },
   };
@@ -237,10 +238,17 @@ function createExtension(name, { overridePage, devtools }) {
         {
           matches: ['<all_urls>'],
           run_at: 'document_idle',
-          js: ['browser-polyfill.js', 'contentScript.js'],
+          js: ['contentScript.js'],
         },
       ],
     };
+  }
+
+  if(crossBrowser) {
+    appManifest.background.scripts = [browserPolyfillFilename, ...appManifest.background.scripts];
+    if(appManifest.content_scripts) {
+      appManifest.content_scripts.forEach(i => i.js.unshift(browserPolyfillFilename));
+    }
   }
 
   // Create manifest file in project directory
@@ -286,4 +294,5 @@ function createExtension(name, { overridePage, devtools }) {
 createExtension(projectName, {
   overridePage: program.overridePage,
   devtools: program.devtools,
+  crossBrowser: program.crossBrowser
 });

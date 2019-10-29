@@ -12,15 +12,19 @@ import './popup.css';
   // https://developer.chrome.com/extensions/declare_permissions
   const counterStorage = {
     get: cb => {
-      browser.storage.sync.get(['count']).then(result => {
+      chrome.storage.sync.get(['count'], result => {
         cb(result.count);
       });
     },
     set: (value, cb) => {
-      browser.storage.sync.set(
+      chrome.storage.sync.set(
         {
           count: value,
-        }).then(cb);
+        },
+        () => {
+          cb();
+        }
+      );
     },
   };
 
@@ -57,20 +61,21 @@ import './popup.css';
 
         // Communicate with content script of
         // active tab by sending a message
-        browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
           const tab = tabs[0];
 
-          browser.tabs.sendMessage(
+          chrome.tabs.sendMessage(
             tab.id,
             {
               type: 'COUNT',
               payload: {
                 count: newCount,
               },
-            }).then(response => {
+            },
+            response => {
               console.log('Current count value passed to contentScript file');
             }
-          ).catch(console.error);
+          );
         });
       });
     });
@@ -93,13 +98,14 @@ import './popup.css';
   document.addEventListener('DOMContentLoaded', restoreCounter);
 
   // Communicate with background file by sending a message
-  browser.runtime.sendMessage(
+  chrome.runtime.sendMessage(
     {
       type: 'GREETINGS',
       payload: {
         message: 'Hello, my name is Pop. I am from Popup.',
       },
-    }).then(response => {
+    },
+    response => {
       console.log(response.message);
     }
   );

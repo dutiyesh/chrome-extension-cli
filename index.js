@@ -194,7 +194,7 @@ function createExtension(name, { overridePage, devtools, crossBrowser }) {
     }
   });
 
-  // if the webextenstion support is not enabled, we need to copy the files with .nocrosbbrowser.js ending
+  // if the webextenstion support is not enabled, we need to copy the template files with .nocrosbbrowser.js ending
   // but after that, these files are renamed and the .nocrosbbrowser extension is removed
   if(!crossBrowser) {
     files.forEach(file => {

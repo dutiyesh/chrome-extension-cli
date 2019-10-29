@@ -179,7 +179,32 @@ function createExtension(name, { overridePage, devtools, crossBrowser }) {
     templateName = 'popup';
   }
 
-  fs.copySync(path.resolve(__dirname, 'templates', templateName), root);
+  const files = [];
+  fs.copySync(path.resolve(__dirname, 'templates', templateName), root, {
+    filter: filename => {
+      if(!filename.match(/\.js$/)) return true; // copy all files that aren't .js files
+      if(!!filename.match(/^webpack\.config\.js$/)) return true; // explcitly copy webpack.config.js all the time
+      if(!crossBrowser && filename.indexOf('.nocrossbrowser') > -1) {
+        files.push(filename);
+        return true;
+      } else if(crossBrowser && filename.indexOf('.nocrossbrowser') < 0) {
+        return true;
+      }
+      return false;
+    }
+  });
+
+  // if the webextenstion support is not enabled, we need to copy the files with .nocrosbbrowser.js ending
+  // but after that, these files are renamed and the .nocrosbbrowser extension is removed
+  if(!crossBrowser) {
+    files.forEach(file => {
+      const { base } = path.parse(file);
+      let srcPath = path.resolve(root, 'src', base);
+      let destPath = path.resolve(root, 'src', base.replace('.nocrossbrowser', ''));
+      console.log(srcPath, destPath);
+      fs.moveSync(srcPath, destPath);
+    });
+  }
 
   // Copy common webpack configuration file
   fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));

@@ -26,13 +26,14 @@ import './app.css';
   setupDashboard();
 
   // Communicate with background file by sending a message
-  browser.runtime.sendMessage(
+  chrome.runtime.sendMessage(
     {
       type: 'GREETINGS',
       payload: {
         message: 'Hello, my name is Ove. I am from Override app.',
       },
-    }).then(response => {
+    },
+    response => {
       console.log(response.message);
     }
   );

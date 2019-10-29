@@ -5,6 +5,6 @@
 // See https://developer.chrome.com/extensions/devtools
 
 // Create a panel named `My Panel`
-browser.devtools.panels.create('My Panel', '', 'panel.html').then( panel => {
+chrome.devtools.panels.create('My Panel', '', 'panel.html', panel => {
   console.log('Panel was successfully created!');
 });

@@ -187,7 +187,7 @@ function createExtension(name, { overridePage, devtools, crossBrowser }) {
       if(!crossBrowser && filename.indexOf('.nocrossbrowser') > -1) {
         files.push(filename);
         return true;
-      } else if(crossBrowser && filename.indexOf('.nocrossbrowser') < 0) {
+      } else if(crossBrowser && filename.indexOf('.nocrossbrowser') === -1) {
         return true;
       }
       return false;

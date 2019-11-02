@@ -64,7 +64,7 @@ module.exports = env => {
           from: '**/*.html',
           context: 'public',
           transform: (content) => {
-            const polyfill = '<script type="application/javascript" src="browser-polyfill.min.js"></script>';
+            const polyfill = '<script src="browser-polyfill.min.js"></script>';
             if(crossBrowser) {
               return content.toString().replace('<%= browser-polyfill %>', polyfill);
             }

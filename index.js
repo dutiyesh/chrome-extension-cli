@@ -201,7 +201,6 @@ function createExtension(name, { overridePage, devtools, crossBrowser }) {
       const { base } = path.parse(file);
       let srcPath = path.resolve(root, 'src', base);
       let destPath = path.resolve(root, 'src', base.replace('.nocrossbrowser', ''));
-      console.log(srcPath, destPath);
       fs.moveSync(srcPath, destPath);
     });
   }

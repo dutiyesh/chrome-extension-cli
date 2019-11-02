@@ -58,7 +58,7 @@ module.exports = env => {
           ignore: ['*.html']
         },
       ]),
-      // copy static .html files from `public` folder to `build` folder, and replace the `<%= polyfill %>` variable depending on config
+      // copy static .html files from `public` folder to `build` folder, and replace the `<%= browser-polyfill %>` variable depending on config
       new CopyWebpackPlugin([
         {
           from: '**/*.html',
@@ -66,9 +66,9 @@ module.exports = env => {
           transform: (content) => {
             const polyfill = '<script type="application/javascript" src="browser-polyfill.min.js"></script>';
             if(crossBrowser) {
-              return content.toString().replace('<%= polyfill %>', polyfill);
+              return content.toString().replace('<%= browser-polyfill %>', polyfill);
             }
-            return content.toString().replace('<%= polyfill %>', '');
+            return content.toString().replace('<%= browser-polyfill %>', '');
           }
         },
       ]),

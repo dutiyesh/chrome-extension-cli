@@ -12,7 +12,7 @@ const packageFile = require('./package.json');
 const { checkAppName, prettifyAppName } = require('./utils/name');
 const generateReadme = require('./scripts/readme');
 const tryGitInit = require('./scripts/git-init');
-const browserPolyfillFilename = 'browser-polyfill.js';
+const browserPolyfillFilename = 'browser-polyfill.min.js';
 
 let projectName;
 const OVERRIDE_PAGES = ['newtab', 'bookmarks', 'history'];

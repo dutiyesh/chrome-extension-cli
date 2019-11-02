@@ -64,7 +64,7 @@ module.exports = env => {
           from: '**/*.html',
           context: 'public',
           transform: (content) => {
-            const polyfill = '<script type="application/javascript" src="browser-polyfill.js"></script>';
+            const polyfill = '<script type="application/javascript" src="browser-polyfill.min.js"></script>';
             if(crossBrowser) {
               return content.toString().replace('<%= polyfill %>', polyfill);
             }
@@ -83,7 +83,7 @@ module.exports = env => {
     // Copy browser-polyfill.js for cross browser compability
     common.plugins.unshift(new CopyWebpackPlugin([
       {
-        from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js'
+        from: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js'
       }
     ]));
   }

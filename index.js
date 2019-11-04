@@ -190,6 +190,10 @@ function createExtension(name, { overridePage, devtools, crossBrowser }) {
         return true;
       } else if(crossBrowser && !endsWithNoCrossbrowser) {
         return true;
+      } else if(!crossBrowser && !endsWithNoCrossbrowser) {
+        const parsedPath = path.parse(filename);
+        const pathWithCrossbrowser = path.resolve(parsedPath.dir, parsedPath.name, '.nocrossbrowser', parsedPath.ext);
+        return !fs.pathExists(pathWithCrossbrowser);
       }
       return false;
     }

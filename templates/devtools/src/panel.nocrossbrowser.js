@@ -1,17 +1,18 @@
 'use strict';
 
 // For more information on Panels API,
-// See https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/devtools_panels
+// See https://developer.chrome.com/extensions/devtools_panels
 
 // We will create a panel to detect
 // whether current page is using React or not.
 
 import './panel.css';
 
-browser.devtools.inspectedWindow.eval(
-  'window.React.version').then(([result, error]) => {
+chrome.devtools.inspectedWindow.eval(
+  'window.React.version',
+  (result, isException) => {
     let message = '';
-    if (error) {
+    if (isException) {
       message = 'This page doesn’t appear to be using React.';
     } else {
       message = `The page is using React v${result} ✅`;
@@ -22,13 +23,14 @@ browser.devtools.inspectedWindow.eval(
 );
 
 // Communicate with background file by sending a message
-browser.runtime.sendMessage(
+chrome.runtime.sendMessage(
   {
     type: 'GREETINGS',
     payload: {
       message: 'Hello, my name is Pan. I am from Panel.',
     },
-  }).then(response => {
+  },
+  response => {
     console.log(response.message);
   }
 );

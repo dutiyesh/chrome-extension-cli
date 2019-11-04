@@ -9,7 +9,7 @@
 // under `content_scripts` property
 
 // For more information on Content Scripts,
-// See https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#Content_scripts
+// See https://developer.chrome.com/extensions/content_scripts
 
 // Log `title` of current active web page
 const pageTitle = document.head.getElementsByTagName('title')[0].innerHTML;
@@ -18,25 +18,26 @@ console.log(
 );
 
 // Communicate with background file by sending a message
-browser.runtime.sendMessage(
+chrome.runtime.sendMessage(
   {
     type: 'GREETINGS',
     payload: {
       message: 'Hello, my name is Con. I am from ContentScript.',
     },
-  }).then(response => {
+  },
+  response => {
     console.log(response.message);
   }
 );
 
 // Listen for message
-browser.runtime.onMessage.addListener((request, sender) => {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'COUNT') {
     console.log(`Current count is ${request.payload.count}`);
   }
 
   // Send an empty response
   // See https://github.com/mozilla/webextension-polyfill/issues/130#issuecomment-531531890
-  // See: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
-  return Promise.resolve({});
+  sendResponse({});
+  return true;
 });

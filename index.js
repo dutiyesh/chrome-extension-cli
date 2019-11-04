@@ -12,6 +12,7 @@ const packageFile = require('./package.json');
 const { checkAppName, prettifyAppName } = require('./utils/name');
 const generateReadme = require('./scripts/readme');
 const tryGitInit = require('./scripts/git-init');
+const browserPolyfillFilename = 'browser-polyfill.min.js';
 
 let projectName;
 const OVERRIDE_PAGES = ['newtab', 'bookmarks', 'history'];
@@ -28,6 +29,7 @@ const program = new commander.Command(packageFile.name)
     'override default page like New Tab, Bookmarks, or History page'
   )
   .option('--devtools', 'add features to Chrome Developer Tools')
+  .option('--no-cross-browser', `the generated project will not be cross-browser compatible`)
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })
@@ -90,7 +92,7 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }) {
+function createExtension(name, { overridePage, devtools, crossBrowser }) {
   const root = path.resolve(name);
   let overridePageName;
 
@@ -126,8 +128,8 @@ function createExtension(name, { overridePage, devtools }) {
 
   appPackage.scripts = {
     watch:
-      'webpack --mode=development --watch --config config/webpack.config.js',
-    build: 'webpack --mode=production --config config/webpack.config.js',
+      `webpack --mode=development --env.CROSS_BROWSER=${crossBrowser} --watch --config config/webpack.config.js`,
+    build: `webpack --mode=production --env.CROSS_BROWSER=${crossBrowser} --config config/webpack.config.js`,
   };
 
   // Create package file in project directory
@@ -148,7 +150,8 @@ function createExtension(name, { overridePage, devtools }) {
     'size-plugin',
     'mini-css-extract-plugin',
     'css-loader',
-    'file-loader'
+    'file-loader',
+    'webextension-polyfill'
   );
 
   console.log('Installing packages. This might take a couple of minutes.');
@@ -176,7 +179,36 @@ function createExtension(name, { overridePage, devtools }) {
     templateName = 'popup';
   }
 
-  fs.copySync(path.resolve(__dirname, 'templates', templateName), root);
+  const files = [];
+  fs.copySync(path.resolve(__dirname, 'templates', templateName), root, {
+    filter: filename => {
+      const endsWithNoCrossbrowser = /\.nocrossbrowser\.js$/.test(filename); // determine if filename ends with '.nocrossbrowser.js'
+      if(!/\.js$/.test(filename)) return true; // copy all files that aren't .js files
+      if(/webpack\.config\.js$/.test(filename)) return true; // explcitly copy webpack.config.js all the time
+      if(!crossBrowser && endsWithNoCrossbrowser) {
+        files.push(filename);
+        return true;
+      } else if(crossBrowser && !endsWithNoCrossbrowser) {
+        return true;
+      } else if(!crossBrowser && !endsWithNoCrossbrowser) {
+        const parsedPath = path.parse(filename);
+        const pathWithCrossbrowser = path.resolve(parsedPath.dir, parsedPath.name, '.nocrossbrowser', parsedPath.ext);
+        return !fs.pathExists(pathWithCrossbrowser);
+      }
+      return false;
+    }
+  });
+
+  // if the webextenstion support is not enabled, we need to copy the template files with .nocrosbbrowser.js ending
+  // but after that, these files are renamed and the .nocrosbbrowser extension is removed
+  if(!crossBrowser) {
+    files.forEach(file => {
+      const { base } = path.parse(file);
+      let srcPath = path.resolve(root, 'src', base);
+      let destPath = path.resolve(root, 'src', base.replace('.nocrossbrowser', ''));
+      fs.moveSync(srcPath, destPath);
+    });
+  }
 
   // Copy common webpack configuration file
   fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));
@@ -241,6 +273,13 @@ function createExtension(name, { overridePage, devtools }) {
     };
   }
 
+  if(crossBrowser) {
+    appManifest.background.scripts = [browserPolyfillFilename, ...appManifest.background.scripts];
+    if(appManifest.content_scripts) {
+      appManifest.content_scripts.forEach(i => i.js.unshift(browserPolyfillFilename));
+    }
+  }
+
   // Create manifest file in project directory
   fs.writeFileSync(
     path.join(root, 'public', 'manifest.json'),
@@ -284,4 +323,5 @@ function createExtension(name, { overridePage, devtools }) {
 createExtension(projectName, {
   overridePage: program.overridePage,
   devtools: program.devtools,
+  crossBrowser: program.crossBrowser
 });

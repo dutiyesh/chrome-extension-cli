@@ -9,7 +9,7 @@
 // under `content_scripts` property
 
 // For more information on Content Scripts,
-// See https://developer.chrome.com/extensions/content_scripts
+// See https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#Content_scripts
 
 // Log `title` of current active web page
 const pageTitle = document.head.getElementsByTagName('title')[0].innerHTML;

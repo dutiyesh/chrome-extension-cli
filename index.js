@@ -183,7 +183,7 @@ function createExtension(name, { overridePage, devtools, crossBrowser }) {
   fs.copySync(path.resolve(__dirname, 'templates', templateName), root, {
     filter: filename => {
       if(!/\.js$/.test(filename)) return true; // copy all files that aren't .js files
-      if(/^webpack\.config\.js$/.test(filename)) return true; // explcitly copy webpack.config.js all the time
+      if(/webpack\.config\.js$/.test(filename)) return true; // explcitly copy webpack.config.js all the time
       if(!crossBrowser && filename.indexOf('.nocrossbrowser') > -1) {
         files.push(filename);
         return true;

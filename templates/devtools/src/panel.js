@@ -9,9 +9,9 @@
 import './panel.css';
 
 browser.devtools.inspectedWindow.eval(
-  'window.React.version').then((result, isException) => {
+  'window.React.version').then(([result, error]) => {
     let message = '';
-    if (isException) {
+    if (error) {
       message = 'This page doesn’t appear to be using React.';
     } else {
       message = `The page is using React v${result} ✅`;

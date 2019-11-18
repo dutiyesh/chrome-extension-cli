@@ -28,6 +28,7 @@ const program = new commander.Command(packageFile.name)
     'override default page like New Tab, Bookmarks, or History page'
   )
   .option('--devtools', 'add features to Chrome Developer Tools')
+  .option('--typescript', 'add support fort TypeScript')
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })
@@ -90,7 +91,7 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }) {
+function createExtension(name, { overridePage, devtools, typescript }) {
   const root = path.resolve(name);
   let overridePageName;
 
@@ -151,6 +152,14 @@ function createExtension(name, { overridePage, devtools }) {
     'file-loader'
   );
 
+  if (typescript) {
+    args.push(
+      '@types/chrome',
+      'awesome-typescript-loader',
+      'typescript'
+    );
+  }
+
   console.log('Installing packages. This might take a couple of minutes.');
   console.log(
     `Installing ${chalk.cyan('webpack')}, ${chalk.cyan(
@@ -179,7 +188,11 @@ function createExtension(name, { overridePage, devtools }) {
   fs.copySync(path.resolve(__dirname, 'templates', templateName), root);
 
   // Copy common webpack configuration file
-  fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));
+  const configFolder = typescript ?
+    path.join('config', 'typescript') :
+    'config';
+
+  fs.copySync(path.resolve(__dirname, configFolder), path.join(root, 'config'));
 
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
   // See: https://github.com/npm/npm/issues/1862
@@ -189,6 +202,18 @@ function createExtension(name, { overridePage, devtools }) {
     path.join(root, '.gitignore'),
     []
   );
+
+  if (typescript) {
+    const srcFolder = path.join(root, 'src');
+    fs.readdirSync(srcFolder).forEach(file => {
+      if (!/\.js$/.test(file)) return;
+      fs.moveSync(
+        path.join(srcFolder, file),
+        path.join(srcFolder, file.replace(/\.js$/, '.ts')),
+        []
+      );
+    });
+  }
 
   // Setup the manifest file
   const manifestDetails = {
@@ -284,4 +309,5 @@ function createExtension(name, { overridePage, devtools }) {
 createExtension(projectName, {
   overridePage: program.overridePage,
   devtools: program.devtools,
+  typescript: program.typescript
 });

@@ -29,7 +29,7 @@ import './popup.css';
   };
 
   function setupCounter(initialValue = 0) {
-    document.getElementById('counter').innerHTML = initialValue;
+    document.getElementById('counter').innerHTML = initialValue.toString();
 
     document.getElementById('incrementBtn').addEventListener('click', () => {
       updateCounter({

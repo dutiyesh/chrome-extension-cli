@@ -83,7 +83,7 @@ my-extension
 │   └── manifest.json
 └── src
     ├── *.css                 // CSS files will vary depending on extension type
-    └── *.js                  // JS files will vary depending on extension type
+    └── *.js                  // JS files will vary depending on extension type (.ts eventually)
 ```
 
 Once the installation is done, you can open your project folder:
@@ -170,6 +170,10 @@ chrome-extension-cli my-extension --override-page=history      // Override Histo
 #### `chrome-extension-cli my-extension --devtools`
 
 Creates a Panel inside developer tools.
+
+### `chrome-extension-cli my-extension --typescript`
+
+Generates an extension with TypeScript in place of JavaScript
 
 ## Contributing
 

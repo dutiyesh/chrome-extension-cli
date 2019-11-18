@@ -171,7 +171,7 @@ chrome-extension-cli my-extension --override-page=history      // Override Histo
 
 Creates a Panel inside developer tools.
 
-### `chrome-extension-cli my-extension --typescript`
+#### `chrome-extension-cli my-extension --typescript`
 
 Generates an extension with TypeScript in place of JavaScript
 

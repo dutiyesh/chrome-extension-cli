@@ -141,14 +141,14 @@ function createExtension(name, { overridePage, devtools }) {
 
   // Add devDependencies
   args.push(
-    'webpack',
-    'webpack-cli',
-    'webpack-merge',
-    'copy-webpack-plugin',
-    'size-plugin',
-    'mini-css-extract-plugin',
-    'css-loader',
-    'file-loader'
+    'webpack@^4.0.0',
+    'webpack-cli@^3.0.0',
+    'webpack-merge@^5.0.0',
+    'copy-webpack-plugin@^6.0.0',
+    'size-plugin@^2.0.0',
+    'mini-css-extract-plugin@^0.10.0',
+    'css-loader@^4.0.0',
+    'file-loader@^6.0.0'
   );
 
   console.log('Installing packages. This might take a couple of minutes.');

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 (August 18, 2020)
+
+🐛 Bug Fix
+- Fix `watch` command issue after initializing the project [#6](https://github.com/dutiyesh/chrome-extension-cli/pull/6)
+
+---
+
 ## 0.2.0 (September 20, 2019)
 
 🐛 Bug Fix

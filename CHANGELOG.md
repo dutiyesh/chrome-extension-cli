@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2 (March 20, 2021)
+
+🐛 Bug Fix
+- Fix unexpected token (spread operator) for node v8 [#10](https://github.com/dutiyesh/chrome-extension-cli/pull/10)
+
+---
+
 ## 0.2.1 (August 18, 2020)
 
 🐛 Bug Fix

@@ -118,11 +118,16 @@ function createExtension(name, { overridePage, devtools }) {
   };
 
   // Setup the package file
-  let appPackage = {
-    name: name,
-    ...appDetails,
-    private: true,
-  };
+  let appPackage = Object.assign(
+    {},
+    {
+      name: name,
+    },
+    appDetails,
+    {
+      private: true,
+    }
+  );
 
   appPackage.scripts = {
     watch:
@@ -191,54 +196,71 @@ function createExtension(name, { overridePage, devtools }) {
   );
 
   // Setup the manifest file
-  const manifestDetails = {
-    name: prettifyAppName(name),
-    ...appDetails,
-  };
+  const manifestDetails = Object.assign(
+    {},
+    {
+      name: prettifyAppName(name),
+    },
+    appDetails,
+  );
 
-  let appManifest = {
-    manifest_version: 2,
-    ...manifestDetails,
-    icons: {
-      16: 'icons/icon_16.png',
-      32: 'icons/icon_32.png',
-      48: 'icons/icon_48.png',
-      128: 'icons/icon_128.png',
+  let appManifest = Object.assign(
+    {},
+    {
+      manifest_version: 2,
     },
-    background: {
-      scripts: ['background.js'],
-      persistent: false,
-    },
-  };
+    manifestDetails,
+    {
+      icons: {
+        16: 'icons/icon_16.png',
+        32: 'icons/icon_32.png',
+        48: 'icons/icon_48.png',
+        128: 'icons/icon_128.png',
+      },
+      background: {
+        scripts: ['background.js'],
+        persistent: false,
+      },
+    }
+  );
 
   if (overridePageName) {
-    appManifest = {
-      ...appManifest,
-      chrome_url_overrides: {
-        [overridePageName]: 'index.html',
-      },
-    };
-  } else if (devtools) {
-    appManifest = {
-      ...appManifest,
-      devtools_page: 'devtools.html',
-    };
-  } else {
-    appManifest = {
-      ...appManifest,
-      browser_action: {
-        default_title: manifestDetails.name,
-        default_popup: 'popup.html',
-      },
-      permissions: ['storage'],
-      content_scripts: [
-        {
-          matches: ['<all_urls>'],
-          run_at: 'document_idle',
-          js: ['contentScript.js'],
+    appManifest = Object.assign(
+      {},
+      appManifest,
+      {
+        chrome_url_overrides: {
+          [overridePageName]: 'index.html',
         },
-      ],
-    };
+      },
+    );
+  } else if (devtools) {
+    appManifest = Object.assign(
+      {},
+      appManifest,
+      {
+        devtools_page: 'devtools.html',
+      },
+    );
+  } else {
+    appManifest = Object.assign(
+      {},
+      appManifest,
+      {
+        browser_action: {
+          default_title: manifestDetails.name,
+          default_popup: 'popup.html',
+        },
+        permissions: ['storage'],
+        content_scripts: [
+          {
+            matches: ['<all_urls>'],
+            run_at: 'document_idle',
+            js: ['contentScript.js'],
+          },
+        ],
+      }
+    );
   }
 
   // Create manifest file in project directory

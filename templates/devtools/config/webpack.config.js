@@ -8,9 +8,12 @@ const PATHS = require('./paths');
 // Merge webpack configuration files
 const config = merge(common, {
   entry: {
-    devtools: PATHS.src + '/devtools.js',
-    panel: PATHS.src + '/panel.js',
-    background: PATHS.src + '/background.js',
+    devtools: PATHS.src + '/devtools',
+    panel: PATHS.src + '/panel',
+    background: PATHS.src + '/background',
+  },
+  resolve: {
+    extensions: ['.js', '.ts'],
   },
 });
 

@@ -16,7 +16,7 @@ const tryGitInit = require('./scripts/git-init');
 let projectName;
 const OVERRIDE_PAGES = ['newtab', 'bookmarks', 'history'];
 
-export function isOverridePageNameValid(name) {
+function isOverridePageNameValid(name) {
   if (name === true || OVERRIDE_PAGES.includes(name)) {
     return true;
   }
@@ -24,7 +24,7 @@ export function isOverridePageNameValid(name) {
   return false;
 }
 
-export function logOverridePageError() {
+function logOverridePageError() {
   console.error(
     `${chalk.red('Invalid page name passed to option:')} ${chalk.cyan(
       '--override-page'
@@ -46,7 +46,7 @@ export function logOverridePageError() {
   process.exit(1);
 }
 
-export function logOptionsConflictError() {
+function logOptionsConflictError() {
   console.error(
     `${chalk.red(
       'You have passed both "--override-page" and "--devtools" options'
@@ -57,7 +57,7 @@ export function logOptionsConflictError() {
   process.exit(1);
 }
 
-export function createExtension(name, { overridePage, devtools }) {
+function createExtension(name, { overridePage, devtools }) {
   const root = path.resolve(name);
   let overridePageName;
 
@@ -269,3 +269,5 @@ export function createExtension(name, { overridePage, devtools }) {
   console.log(`  6. Select the folder ${chalk.cyan(name + '/build')}`);
   console.log();
 }
+
+module.exports = { isOverridePageNameValid, logOverridePageError, logOptionsConflictError, createExtension};

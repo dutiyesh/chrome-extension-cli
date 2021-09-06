@@ -1,12 +1,9 @@
 {
-  "name": "chrome-extension-cli",
+  "name": "chrome-extension-cli-client",
   "version": "0.2.2",
-  "description": "The CLI for your next Chrome Extension.",
-  "repository": "dutiyesh/chrome-extension-cli",
+  "description": "chrome-extension-cli fork for nodejs use. Original from Dutiyesh Salunkhe.",
+  "repository": "gadhagod/chrome-extension-cli-client",
   "main": "index.js",
-  "bin": {
-    "chrome-extension-cli": "index.js"
-  },
   "scripts": {
     "format": "prettier --single-quote --trailing-comma es5 --write 'index.js' '{config,scripts,utils,templates}/**/*.js'"
   },
@@ -23,13 +20,9 @@
     "override-page",
     "devtools"
   ],
-  "author": {
-    "name": "Dutiyesh Salunkhe",
-    "email": "dutiyesh@gmail.com",
-    "url": "http://dutiyesh.com"
-  },
+  "author": "Aarav Borthakur",
   "bugs": {
-    "url": "https://github.com/dutiyesh/chrome-extension-cli/issues"
+    "url": "https://github.com/gadhagod/chrome-extension-cli/issues"
   },
   "engines": {
     "node": ">=8"

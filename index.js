@@ -16,40 +16,7 @@ const tryGitInit = require('./scripts/git-init');
 let projectName;
 const OVERRIDE_PAGES = ['newtab', 'bookmarks', 'history'];
 
-const program = new commander.Command(packageFile.name)
-  .version(packageFile.version)
-  .arguments('<project-directory>')
-  .usage(`${chalk.green('<project-directory>')} [options]`)
-  .action(name => {
-    projectName = name;
-  })
-  .option(
-    '--override-page [page-name]',
-    'override default page like New Tab, Bookmarks, or History page'
-  )
-  .option('--devtools', 'add features to Chrome Developer Tools')
-  .on('--help', () => {
-    console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
-  })
-  .parse(process.argv);
-
-// Exit from the process if no project name is provided
-if (typeof projectName === 'undefined') {
-  console.error('Please specify the project directory:');
-  console.log(
-    `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`
-  );
-  console.log();
-  console.log('For example:');
-  console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-extension')}`);
-  console.log();
-  console.log(
-    `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
-  );
-  process.exit(1);
-}
-
-function isOverridePageNameValid(name) {
+export function isOverridePageNameValid(name) {
   if (name === true || OVERRIDE_PAGES.includes(name)) {
     return true;
   }
@@ -57,7 +24,7 @@ function isOverridePageNameValid(name) {
   return false;
 }
 
-function logOverridePageError() {
+export function logOverridePageError() {
   console.error(
     `${chalk.red('Invalid page name passed to option:')} ${chalk.cyan(
       '--override-page'
@@ -79,7 +46,7 @@ function logOverridePageError() {
   process.exit(1);
 }
 
-function logOptionsConflictError() {
+export function logOptionsConflictError() {
   console.error(
     `${chalk.red(
       'You have passed both "--override-page" and "--devtools" options'
@@ -90,7 +57,7 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }) {
+export function createExtension(name, { overridePage, devtools }) {
   const root = path.resolve(name);
   let overridePageName;
 
@@ -302,8 +269,3 @@ function createExtension(name, { overridePage, devtools }) {
   console.log(`  6. Select the folder ${chalk.cyan(name + '/build')}`);
   console.log();
 }
-
-createExtension(projectName, {
-  overridePage: program.overridePage,
-  devtools: program.devtools,
-});

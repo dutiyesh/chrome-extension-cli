@@ -57,8 +57,8 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }, path) {
-  const root = path;
+function createExtension(name, { overridePage, devtools }, dirPath) {
+  const root = dirPath;
   let overridePageName;
 
   if (overridePage) {

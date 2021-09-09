@@ -1,6 +1,6 @@
-# Chrome Extension CLI Templates
+# Templates
 
-With Chrome Extension CLI you can built any of the below extensions:
+With Chrome Extension CLI Client you can built any of the below extensions:
 
 ## Popup
 

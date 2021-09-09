@@ -28,15 +28,15 @@ function logOverridePageError() {
       '--override-page'
     )}`
   );
-  console.log();
-  console.log(
+  outputFunc("");
+  outputFunc(
     `You can pass page name as ${chalk.cyan('newtab')}, ${chalk.cyan(
       'bookmarks'
     )} or ${chalk.cyan('history')}.`
   );
-  console.log();
-  console.log('For example:');
-  console.log(
+  outputFunc("");
+  outputFunc('For example:');
+  outputFunc(
     `  ${chalk.cyan(program.name())} ${chalk.green(
       'my-extension'
     )} ${chalk.cyan('--override-page')} ${chalk.green('newtab')}`
@@ -50,12 +50,12 @@ function logOptionsConflictError() {
       'You have passed both "--override-page" and "--devtools" options'
     )}`
   );
-  console.log(`  ${chalk.cyan('Only pass one of the option')}`);
-  console.log('');
+  outputFunc(`  ${chalk.cyan('Only pass one of the option')}`);
+  outputFunc('');
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }, dirPath) {
+function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=outputFunc) {
   const root = path.join(dirPath, name);
   let overridePageName;
 
@@ -74,8 +74,8 @@ function createExtension(name, { overridePage, devtools }, dirPath) {
   checkAppName(name);
   fs.ensureDirSync(path.join(dirPath, name));
 
-  console.log(`Creating a new Chrome extension in ${chalk.green(root)}`);
-  console.log();
+  outputFunc(`Creating a new Chrome extension in ${chalk.green(root)}`);
+  outputFunc("");
 
   const appDetails = {
     version: '0.1.0',
@@ -121,13 +121,13 @@ function createExtension(name, { overridePage, devtools }, dirPath) {
     'file-loader@^6.0.0'
   );
 
-  console.log('Installing packages. This might take a couple of minutes.');
-  console.log(
+  outputFunc('Installing packages. This might take a couple of minutes.');
+  outputFunc(
     `Installing ${chalk.cyan('webpack')}, ${chalk.cyan(
       'webpack-cli'
     )} and few more...`
   );
-  console.log();
+  outputFunc("");
 
   // Install package dependencies
   const proc = spawn.sync(command, args, { cwd: root, stdio: 'inherit' });
@@ -236,36 +236,36 @@ function createExtension(name, { overridePage, devtools }, dirPath) {
 
   // Generate a README file
   if (generateReadme(manifestDetails, root)) {
-    console.log('Generated a README file.');
-    console.log();
+    outputFunc('Generated a README file.');
+    outputFunc("");
   }
 
   // Initialize a git repository
   if (tryGitInit(root, name)) {
-    console.log('Initialized a git repository.');
-    console.log();
+    outputFunc('Initialized a git repository.');
+    outputFunc("");
   }
 
-  console.log(`Success! Created ${name} at ${root}`);
-  console.log('Inside that directory, you can run below commands:');
-  console.log();
-  console.log(chalk.cyan(`  ${command} run watch`));
-  console.log('    Listens for files changes and rebuilds automatically.');
-  console.log();
-  console.log(chalk.cyan(`  ${command} run build`));
-  console.log('    Bundles the app into static files for Chrome store.');
-  console.log();
-  console.log('We suggest that you begin by typing:');
-  console.log();
-  console.log(`  1. ${chalk.cyan('cd')} ${name}`);
-  console.log(`  2. Run ${chalk.cyan(`${command} run watch`)}`);
-  console.log(`  3. Open ${chalk.cyan('chrome://extensions')}`);
-  console.log(`  4. Check the ${chalk.cyan('Developer mode')} checkbox`);
-  console.log(
+  outputFunc(`Success! Created ${name} at ${root}`);
+  outputFunc('Inside that directory, you can run below commands:');
+  outputFunc("");
+  outputFunc(chalk.cyan(`  ${command} run watch`));
+  outputFunc('    Listens for files changes and rebuilds automatically.');
+  outputFunc("");
+  outputFunc(chalk.cyan(`  ${command} run build`));
+  outputFunc('    Bundles the app into static files for Chrome store.');
+  outputFunc("");
+  outputFunc('We suggest that you begin by typing:');
+  outputFunc("");
+  outputFunc(`  1. ${chalk.cyan('cd')} ${name}`);
+  outputFunc(`  2. Run ${chalk.cyan(`${command} run watch`)}`);
+  outputFunc(`  3. Open ${chalk.cyan('chrome://extensions')}`);
+  outputFunc(`  4. Check the ${chalk.cyan('Developer mode')} checkbox`);
+  outputFunc(
     `  5. Click on the ${chalk.cyan('Load unpacked extension')} button`
   );
-  console.log(`  6. Select the folder ${chalk.cyan(name + '/build')}`);
-  console.log();
+  outputFunc(`  6. Select the folder ${chalk.cyan(name + '/build')}`);
+  outputFunc("");
 }
 
 module.exports = { isOverridePageNameValid, logOverridePageError, logOptionsConflictError, createExtension};

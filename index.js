@@ -22,7 +22,7 @@ function isOverridePageNameValid(name) {
   return false;
 }
 
-function logOverridePageError() {
+function logOverridePageError(outputFunc) {
   console.error(
     `${chalk.red('Invalid page name passed to option:')} ${chalk.cyan(
       '--override-page'
@@ -44,18 +44,18 @@ function logOverridePageError() {
   process.exit(1);
 }
 
-function logOptionsConflictError() {
+function logOptionsConflictError(outputFunc) {
   console.error(
     `${chalk.red(
       'You have passed both "--override-page" and "--devtools" options'
     )}`
   );
-  outputFunc(`  ${chalk.cyan('Only pass one of the option')}`);
-  outputFunc('');
+  outputFunc(`  ${chalk.cyan("Only pass one of the option")}`);
+  outputFunc("");
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=outputFunc) {
+function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=console.log) {
   const root = path.join(dirPath, name);
   let overridePageName;
 

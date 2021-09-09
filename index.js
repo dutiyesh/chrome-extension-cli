@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 const path = require('path');
@@ -58,7 +56,7 @@ function logOptionsConflictError() {
 }
 
 function createExtension(name, { overridePage, devtools }, dirPath) {
-  const root = dirPath;
+  const root = path.join(dirPath, name);
   let overridePageName;
 
   if (overridePage) {
@@ -74,7 +72,7 @@ function createExtension(name, { overridePage, devtools }, dirPath) {
   }
 
   checkAppName(name);
-  fs.ensureDirSync(name);
+  fs.ensureDirSync(path.join(dirPath, name));
 
   console.log(`Creating a new Chrome extension in ${chalk.green(root)}`);
   console.log();

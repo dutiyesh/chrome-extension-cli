@@ -16,7 +16,7 @@
 5. Select this directory.
 
 ## Bundle the extension
-To the source code into static files for the Chrome webstore, execute `npm run build`.
+To package the source code into static files for the Chrome webstore, execute `npm run build`.
 
 ## VSCode developer tools
 Refer to [github.com/gadhagod/vscode-chrome-extension-developer-tools/blob/master/README.md#commands](https://github.com/gadhagod/vscode-chrome-extension-developer-tools/blob/master/README.md#commands).

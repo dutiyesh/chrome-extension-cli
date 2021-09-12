@@ -19,7 +19,7 @@ ${appDetails.description}
 
 ## Install
 
-[**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
+[**Chrome** extension]()
 
 ## Contribution
 

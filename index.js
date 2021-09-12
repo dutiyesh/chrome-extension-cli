@@ -96,8 +96,9 @@ function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=c
 
   appPackage.scripts = {
     watch:
-      'webpack --mode=development --watch --config config/webpack.config.js',
-    build: 'webpack --mode=production --config config/webpack.config.js',
+      "./node_modules/webpack/bin/webpack.js --mode=development --watch --config config/webpack.config.js",
+    build:
+      "./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js"
   };
 
   // Create package file in project directory

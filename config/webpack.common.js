@@ -17,7 +17,6 @@ const common = {
     // the filename template for entry chunks
     filename: '[name].js',
   },
-  devtool: 'source-map',
   stats: {
     all: false,
     errors: true,

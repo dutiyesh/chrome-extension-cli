@@ -90,6 +90,7 @@ function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=c
     },
     appDetails,
     {
+      $schema: "https://json.schemastore.org/chrome-manifest.json",
       private: true,
     }
   );

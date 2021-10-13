@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.3 (October 13, 2021)
+
+💅 Polish
+- Exclude source map from prod build [#15](https://github.com/dutiyesh/chrome-extension-cli/pull/15)
+
+---
+
 ## 0.2.2 (March 20, 2021)
 
 🐛 Bug Fix

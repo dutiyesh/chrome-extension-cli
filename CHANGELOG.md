@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.4 (March 18, 2022)
+
+🐛 Bug Fix
+- Fix hyphen issue from app name
+
+---
+
 ## 0.2.3 (October 13, 2021)
 
 💅 Polish

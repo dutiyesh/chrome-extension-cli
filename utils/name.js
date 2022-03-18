@@ -5,7 +5,7 @@ const validateProjectName = require('validate-npm-package-name');
 
 function prettifyAppName(name) {
   return name
-    .replace('-', ' ')
+    .replace(/-/g, ' ')
     .toLowerCase()
     .split(' ')
     .map(word => word.substring(0, 1).toUpperCase() + word.substring(1))

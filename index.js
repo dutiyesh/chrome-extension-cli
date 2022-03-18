@@ -207,7 +207,7 @@ function createExtension(name, { overridePage, devtools }) {
   let appManifest = Object.assign(
     {},
     {
-      manifest_version: 2,
+      manifest_version: 3,
     },
     manifestDetails,
     {
@@ -218,8 +218,7 @@ function createExtension(name, { overridePage, devtools }) {
         128: 'icons/icon_128.png',
       },
       background: {
-        scripts: ['background.js'],
-        persistent: false,
+        service_worker: 'background.js',
       },
     }
   );
@@ -247,7 +246,7 @@ function createExtension(name, { overridePage, devtools }) {
       {},
       appManifest,
       {
-        browser_action: {
+        action: {
           default_title: manifestDetails.name,
           default_popup: 'popup.html',
         },

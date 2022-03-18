@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 (March 18, 2022)
+
+💥 Breaking Change
+- Add manifest v3 support [#18](https://github.com/dutiyesh/chrome-extension-cli/pull/18)
+
+---
+
 ## 0.2.4 (March 18, 2022)
 
 🐛 Bug Fix

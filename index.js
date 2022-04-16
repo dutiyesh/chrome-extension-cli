@@ -189,11 +189,7 @@ function createExtension(name, { overridePage, devtools }) {
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
   // See: https://github.com/npm/npm/issues/1862
   // Source: https://github.com/facebook/create-react-app/blob/47e9e2c7a07bfe60b52011cf71de5ca33bdeb6e3/packages/react-scripts/scripts/init.js#L138
-  fs.moveSync(
-    path.join(root, 'gitignore'),
-    path.join(root, '.gitignore'),
-    []
-  );
+  fs.moveSync(path.join(root, 'gitignore'), path.join(root, '.gitignore'), []);
 
   // Setup the manifest file
   const manifestDetails = Object.assign(
@@ -201,7 +197,7 @@ function createExtension(name, { overridePage, devtools }) {
     {
       name: prettifyAppName(name),
     },
-    appDetails,
+    appDetails
   );
 
   let appManifest = Object.assign(
@@ -224,42 +220,30 @@ function createExtension(name, { overridePage, devtools }) {
   );
 
   if (overridePageName) {
-    appManifest = Object.assign(
-      {},
-      appManifest,
-      {
-        chrome_url_overrides: {
-          [overridePageName]: 'index.html',
-        },
+    appManifest = Object.assign({}, appManifest, {
+      chrome_url_overrides: {
+        [overridePageName]: 'index.html',
       },
-    );
+    });
   } else if (devtools) {
-    appManifest = Object.assign(
-      {},
-      appManifest,
-      {
-        devtools_page: 'devtools.html',
-      },
-    );
+    appManifest = Object.assign({}, appManifest, {
+      devtools_page: 'devtools.html',
+    });
   } else {
-    appManifest = Object.assign(
-      {},
-      appManifest,
-      {
-        action: {
-          default_title: manifestDetails.name,
-          default_popup: 'popup.html',
+    appManifest = Object.assign({}, appManifest, {
+      action: {
+        default_title: manifestDetails.name,
+        default_popup: 'popup.html',
+      },
+      permissions: ['storage'],
+      content_scripts: [
+        {
+          matches: ['<all_urls>'],
+          run_at: 'document_idle',
+          js: ['contentScript.js'],
         },
-        permissions: ['storage'],
-        content_scripts: [
-          {
-            matches: ['<all_urls>'],
-            run_at: 'document_idle',
-            js: ['contentScript.js'],
-          },
-        ],
-      }
-    );
+      ],
+    });
   }
 
   // Create manifest file in project directory

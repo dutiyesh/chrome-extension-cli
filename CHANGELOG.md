@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 (April 17, 2022)
+
+🚀 New Feature
+- Add TypeScript support [#21](https://github.com/dutiyesh/chrome-extension-cli/pull/21)
+
+---
+
 ## 1.0.0 (March 18, 2022)
 
 💥 Breaking Change

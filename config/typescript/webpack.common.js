@@ -1,10 +1,12 @@
 'use strict';
 
-const SizePlugin = require('size-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const PATHS = require('./paths');
+
+// used in the module rules and in the stats exlude list
+const IMAGE_TYPES = /\.(png|jpe?g|gif|svg)$/i;
 
 // To re-use webpack configuration across templates,
 // CLI maintains a common webpack configuration file - `webpack.common.js`.
@@ -21,6 +23,8 @@ const common = {
     all: false,
     errors: true,
     builtAt: true,
+    assets: true,
+    excludeAssets: [IMAGE_TYPES],
   },
   module: {
     rules: [
@@ -36,7 +40,7 @@ const common = {
       },
       // Check for images imported in .js files and
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: IMAGE_TYPES,
         use: [
           {
             loader: 'file-loader',
@@ -54,8 +58,6 @@ const common = {
     extensions: ['.ts', '.js'],
   },
   plugins: [
-    // Print file sizes
-    new SizePlugin(),
     // Copy static assets from `public` folder to `build` folder
     new CopyWebpackPlugin({
       patterns: [

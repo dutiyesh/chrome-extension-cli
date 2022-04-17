@@ -207,18 +207,17 @@ function createExtension(name, { overridePage, devtools, language }) {
 
   // Add devDependencies
   args.push(
-    'webpack@^4.0.0',
-    'webpack-cli@^3.0.0',
-    'webpack-merge@^5.0.0',
-    'copy-webpack-plugin@^6.0.0',
-    'size-plugin@^2.0.0',
-    'mini-css-extract-plugin@^0.10.0',
-    'css-loader@^4.0.0',
-    'file-loader@^6.0.0'
+    'webpack@^5.72.0',
+    'webpack-cli@^4.9.2',
+    'webpack-merge@^5.8.0',
+    'copy-webpack-plugin@^10.2.4',
+    'mini-css-extract-plugin@^2.6.0',
+    'css-loader@^6.7.1',
+    'file-loader@^6.2.0'
   );
 
   if (languageName === 'typescript') {
-    args.push('typescript@4.6.3', 'ts-loader@8.3.0', '@types/chrome@0.0.181');
+    args.push('typescript@4.6.3', 'ts-loader@9.2.8', '@types/chrome@0.0.181');
   }
 
   console.log('Installing packages. This might take a couple of minutes.');

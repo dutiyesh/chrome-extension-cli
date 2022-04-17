@@ -24,6 +24,11 @@ const common = {
   },
   module: {
     rules: [
+      // Check for TypeScript files
+      {
+        test: /\.ts$/,
+        use: ['ts-loader'],
+      },
       // Help webpack in understanding CSS files imported in .js files
       {
         test: /\.css$/,
@@ -43,6 +48,10 @@ const common = {
         ],
       },
     ],
+  },
+  resolve: {
+    // Help webpack resolve these extensions in order
+    extensions: ['.ts', '.js'],
   },
   plugins: [
     // Print file sizes

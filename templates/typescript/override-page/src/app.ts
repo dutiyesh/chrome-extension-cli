@@ -5,19 +5,19 @@ import getDay from './day';
 import './app.css';
 
 (function() {
-  function setTime() {
-    const time = getCurrentTime();
+  function setTime(): void {
+    const time: string = getCurrentTime();
 
-    document.getElementById('clock').innerHTML = time;
+    document.getElementById('clock')!.innerHTML = time;
   }
 
-  function setDay() {
-    const day = getDay();
+  function setDay(): void {
+    const day: string = getDay();
 
-    document.getElementById('day').innerHTML = day;
+    document.getElementById('day')!.innerHTML = day;
   }
 
-  function setupDashboard() {
+  function setupDashboard(): void {
     setDay();
     setTime();
     setInterval(setTime, 1000);

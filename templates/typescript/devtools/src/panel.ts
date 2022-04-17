@@ -11,14 +11,14 @@ import './panel.css';
 chrome.devtools.inspectedWindow.eval(
   'window.React.version',
   (result, isException) => {
-    let message = '';
+    let message: string = '';
     if (isException) {
       message = 'This page doesn’t appear to be using React.';
     } else {
       message = `The page is using React v${result} ✅`;
     }
 
-    document.getElementById('message').innerHTML = message;
+    document.getElementById('message')!.innerHTML = message;
   }
 );
 

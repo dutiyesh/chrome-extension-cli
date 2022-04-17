@@ -11,12 +11,12 @@ import './popup.css';
   // More information on Permissions can we found at
   // https://developer.chrome.com/extensions/declare_permissions
   const counterStorage = {
-    get: cb => {
+    get: (cb: (count: number) => void) => {
       chrome.storage.sync.get(['count'], result => {
         cb(result.count);
       });
     },
-    set: (value, cb) => {
+    set: (value: number, cb: () => void) => {
       chrome.storage.sync.set(
         {
           count: value,
@@ -29,24 +29,24 @@ import './popup.css';
   };
 
   function setupCounter(initialValue = 0) {
-    document.getElementById('counter').innerHTML = initialValue;
+    document.getElementById('counter')!.innerHTML = initialValue.toString();
 
-    document.getElementById('incrementBtn').addEventListener('click', () => {
+    document.getElementById('incrementBtn')!.addEventListener('click', () => {
       updateCounter({
         type: 'INCREMENT',
       });
     });
 
-    document.getElementById('decrementBtn').addEventListener('click', () => {
+    document.getElementById('decrementBtn')!.addEventListener('click', () => {
       updateCounter({
         type: 'DECREMENT',
       });
     });
   }
 
-  function updateCounter({ type }) {
-    counterStorage.get(count => {
-      let newCount;
+  function updateCounter({ type }: { type: string }) {
+    counterStorage.get((count: number) => {
+      let newCount: number;
 
       if (type === 'INCREMENT') {
         newCount = count + 1;
@@ -57,7 +57,7 @@ import './popup.css';
       }
 
       counterStorage.set(newCount, () => {
-        document.getElementById('counter').innerHTML = newCount;
+        document.getElementById('counter')!.innerHTML = newCount.toString();
 
         // Communicate with content script of
         // active tab by sending a message
@@ -65,7 +65,7 @@ import './popup.css';
           const tab = tabs[0];
 
           chrome.tabs.sendMessage(
-            tab.id,
+            tab.id!,
             {
               type: 'COUNT',
               payload: {
@@ -83,7 +83,7 @@ import './popup.css';
 
   function restoreCounter() {
     // Restore count value
-    counterStorage.get(count => {
+    counterStorage.get((count: number) => {
       if (typeof count === 'undefined') {
         // Set counter value as 0
         counterStorage.set(0, () => {

@@ -1,4 +1,4 @@
-const DAYS = [
+const DAYS: string[] = [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -8,8 +8,8 @@ const DAYS = [
   'Saturday',
 ];
 
-function getDay() {
-  const day = new Date().getDay();
+function getDay(): string {
+  const day: number = new Date().getDay();
 
   return DAYS[day];
 }

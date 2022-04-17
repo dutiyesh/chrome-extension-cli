@@ -171,6 +171,17 @@ chrome-extension-cli my-extension --override-page=history      // Override Histo
 
 Creates a Panel inside developer tools.
 
+#### `chrome-extension-cli my-extension --language`
+
+Creates an extension for supported languages like JavaScript and TypeScript.<br>
+By default extension is created for JavaScript language and you can also pass other value to `--language` option to create extension for TypeScript.
+
+```
+chrome-extension-cli my-extension                          // Language JavaScript (default)
+chrome-extension-cli my-extension --language=javascript    // Language JavaScript
+chrome-extension-cli my-extension --language=typescript    // Language TypeScript
+```
+
 ## Contributing
 
 See the [contribution guide](CONTRIBUTING.md) and join the contributors!

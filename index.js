@@ -14,7 +14,17 @@ const generateReadme = require('./scripts/readme');
 const tryGitInit = require('./scripts/git-init');
 
 let projectName;
+const LANGUAGES = ['javascript', 'typescript'];
 const OVERRIDE_PAGES = ['newtab', 'bookmarks', 'history'];
+const TS_CONFIG = {
+  compilerOptions: {
+    rootDir: 'src',
+    target: 'es6',
+    module: 'commonjs',
+    esModuleInterop: true,
+    strict: true,
+  },
+};
 
 const program = new commander.Command(packageFile.name)
   .version(packageFile.version)
@@ -28,6 +38,10 @@ const program = new commander.Command(packageFile.name)
     'override default page like New Tab, Bookmarks, or History page'
   )
   .option('--devtools', 'add features to Chrome Developer Tools')
+  .option(
+    '--language [language-name]',
+    'language like JavaScript and TypeScript'
+  )
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })
@@ -57,6 +71,14 @@ function isOverridePageNameValid(name) {
   return false;
 }
 
+function isLanguageNameValid(name) {
+  if (name === true || LANGUAGES.includes(name)) {
+    return true;
+  }
+
+  return false;
+}
+
 function logOverridePageError() {
   console.error(
     `${chalk.red('Invalid page name passed to option:')} ${chalk.cyan(
@@ -79,6 +101,28 @@ function logOverridePageError() {
   process.exit(1);
 }
 
+function logLanguageError() {
+  console.error(
+    `${chalk.red('Invalid language name passed to option:')} ${chalk.cyan(
+      '--language'
+    )}`
+  );
+  console.log();
+  console.log(
+    `You can pass language name as ${chalk.cyan('javascript')} or ${chalk.cyan(
+      'typescript'
+    )}.`
+  );
+  console.log();
+  console.log('For example:');
+  console.log(
+    `  ${chalk.cyan(program.name())} ${chalk.green(
+      'my-extension'
+    )} ${chalk.cyan('--language')} ${chalk.green('typescript')}`
+  );
+  process.exit(1);
+}
+
 function logOptionsConflictError() {
   console.error(
     `${chalk.red(
@@ -90,9 +134,10 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools }) {
+function createExtension(name, { overridePage, devtools, language }) {
   const root = path.resolve(name);
   let overridePageName;
+  let languageName = 'javascript';
 
   if (overridePage) {
     if (isOverridePageNameValid(overridePage)) {
@@ -103,6 +148,14 @@ function createExtension(name, { overridePage, devtools }) {
       }
     } else {
       logOverridePageError();
+    }
+  }
+
+  if (language) {
+    if (isLanguageNameValid(language)) {
+      languageName = language === true ? 'javascript' : language;
+    } else {
+      logLanguageError();
     }
   }
 
@@ -141,6 +194,14 @@ function createExtension(name, { overridePage, devtools }) {
     JSON.stringify(appPackage, null, 2)
   );
 
+  // Create tsconfig file in project directory
+  if (languageName === 'typescript') {
+    fs.writeFileSync(
+      path.join(root, 'tsconfig.json'),
+      JSON.stringify(TS_CONFIG, null, 2)
+    );
+  }
+
   let command = 'npm';
   let args = ['install', '--save-dev'];
 
@@ -155,6 +216,10 @@ function createExtension(name, { overridePage, devtools }) {
     'css-loader@^4.0.0',
     'file-loader@^6.0.0'
   );
+
+  if (languageName === 'typescript') {
+    args.push('typescript@4.6.3', 'ts-loader@8.3.0', '@types/chrome@0.0.181');
+  }
 
   console.log('Installing packages. This might take a couple of minutes.');
   console.log(
@@ -181,10 +246,27 @@ function createExtension(name, { overridePage, devtools }) {
     templateName = 'popup';
   }
 
-  fs.copySync(path.resolve(__dirname, 'templates', templateName), root);
+  fs.copySync(
+    path.resolve(__dirname, 'templates', languageName, templateName),
+    root
+  );
+
+  // Copy common files between languages
+  fs.copySync(
+    path.resolve(__dirname, 'templates', 'shared', templateName),
+    root
+  );
+
+  fs.copySync(
+    path.resolve(__dirname, 'config', languageName),
+    path.join(root, 'config')
+  );
 
   // Copy common webpack configuration file
-  fs.copySync(path.resolve(__dirname, 'config'), path.join(root, 'config'));
+  fs.copySync(
+    path.resolve(__dirname, 'config', 'shared'),
+    path.join(root, 'config')
+  );
 
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
   // See: https://github.com/npm/npm/issues/1862
@@ -289,4 +371,5 @@ function createExtension(name, { overridePage, devtools }) {
 createExtension(projectName, {
   overridePage: program.overridePage,
   devtools: program.devtools,
+  language: program.language,
 });

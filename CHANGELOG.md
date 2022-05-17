@@ -1,5 +1,12 @@
 # Changelog
 
+ ## 1.2.0 (May 17, 2022)
+
+🏠 Internal
+- Upgrade webpack and other dependency versions [#23](https://github.com/dutiyesh/chrome-extension-cli/pull/23)
+
+---
+
 ## 1.1.0 (April 17, 2022)
 
 🚀 New Feature

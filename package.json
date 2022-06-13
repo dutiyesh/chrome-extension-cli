@@ -8,7 +8,7 @@
     "chrome-extension-cli": "index.js"
   },
   "scripts": {
-    "format": "prettier --single-quote --trailing-comma es5 --write 'index.js' '{config,scripts,utils,templates}/**/*.{js,ts,css}'"
+    "format": "prettier --write --ignore-unknown 'index.js' '{config,scripts,utils,templates}/**/*.{js,ts,css,html,json}'"
   },
   "keywords": [
     "chrome",
@@ -43,6 +43,6 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
-    "prettier": "^1.18.2"
+    "prettier": "^2.6.2"
   }
 }

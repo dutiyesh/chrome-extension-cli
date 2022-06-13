@@ -30,7 +30,7 @@ const program = new commander.Command(packageFile.name)
   .version(packageFile.version)
   .arguments('<project-directory>')
   .usage(`${chalk.green('<project-directory>')} [options]`)
-  .action(name => {
+  .action((name) => {
     projectName = name;
   })
   .option(

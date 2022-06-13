@@ -4,7 +4,7 @@ import getCurrentTime from './clock';
 import getDay from './day';
 import './app.css';
 
-(function() {
+(function () {
   function setTime(): void {
     const time: string = getCurrentTime();
 
@@ -33,7 +33,7 @@ import './app.css';
         message: 'Hello, my name is Ove. I am from Override app.',
       },
     },
-    response => {
+    (response) => {
       console.log(response.message);
     }
   );

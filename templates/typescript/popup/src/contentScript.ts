@@ -12,8 +12,8 @@
 // See https://developer.chrome.com/extensions/content_scripts
 
 // Log `title` of current active web page
-const pageTitle: string = document.head.getElementsByTagName('title')[0]
-  .innerHTML;
+const pageTitle: string =
+  document.head.getElementsByTagName('title')[0].innerHTML;
 console.log(
   `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
 );
@@ -26,7 +26,7 @@ chrome.runtime.sendMessage(
       message: 'Hello, my name is Con. I am from ContentScript.',
     },
   },
-  response => {
+  (response) => {
     console.log(response.message);
   }
 );

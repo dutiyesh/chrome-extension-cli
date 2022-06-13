@@ -30,7 +30,7 @@ chrome.runtime.sendMessage(
       message: 'Hello, my name is Pan. I am from Panel.',
     },
   },
-  response => {
+  (response) => {
     console.log(response.message);
   }
 );

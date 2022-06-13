@@ -8,7 +8,7 @@ function prettifyAppName(name) {
     .replace(/-/g, ' ')
     .toLowerCase()
     .split(' ')
-    .map(word => word.substring(0, 1).toUpperCase() + word.substring(1))
+    .map((word) => word.substring(0, 1).toUpperCase() + word.substring(1))
     .join(' ');
 }
 
@@ -29,7 +29,7 @@ function checkAppName(name) {
 
 function printValidationResults(results) {
   if (typeof results !== 'undefined') {
-    results.forEach(error => {
+    results.forEach((error) => {
       console.error(chalk.red(`  *  ${error}`));
     });
   }

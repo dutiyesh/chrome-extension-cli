@@ -25,7 +25,7 @@ chrome.runtime.sendMessage(
       message: 'Hello, my name is Con. I am from ContentScript.',
     },
   },
-  response => {
+  (response) => {
     console.log(response.message);
   }
 );

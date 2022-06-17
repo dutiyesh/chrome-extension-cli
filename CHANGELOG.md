@@ -1,6 +1,16 @@
 # Changelog
 
- ## 1.2.0 (May 17, 2022)
+## 1.3.0 (June 17, 2022)
+
+🚀 New Feature
+- Add code formatting support [#28](https://github.com/dutiyesh/chrome-extension-cli/pull/28)
+
+💅 Polish
+- Format files [#27](https://github.com/dutiyesh/chrome-extension-cli/pull/27)
+
+---
+
+## 1.2.0 (May 17, 2022)
 
 🏠 Internal
 - Upgrade webpack and other dependency versions [#23](https://github.com/dutiyesh/chrome-extension-cli/pull/23)

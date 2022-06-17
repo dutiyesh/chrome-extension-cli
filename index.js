@@ -186,6 +186,8 @@ function createExtension(name, { overridePage, devtools, language }) {
     watch:
       'webpack --mode=development --watch --config config/webpack.config.js',
     build: 'webpack --mode=production --config config/webpack.config.js',
+    format:
+      'prettier --write --ignore-unknown "{config,public,src}/**/*.{html,css,js,ts,json}"',
   };
 
   // Create package file in project directory
@@ -213,7 +215,8 @@ function createExtension(name, { overridePage, devtools, language }) {
     'copy-webpack-plugin@^10.2.4',
     'mini-css-extract-plugin@^2.6.0',
     'css-loader@^6.7.1',
-    'file-loader@^6.2.0'
+    'file-loader@^6.2.0',
+    'prettier@^2.6.2'
   );
 
   if (languageName === 'typescript') {
@@ -270,7 +273,20 @@ function createExtension(name, { overridePage, devtools, language }) {
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
   // See: https://github.com/npm/npm/issues/1862
   // Source: https://github.com/facebook/create-react-app/blob/47e9e2c7a07bfe60b52011cf71de5ca33bdeb6e3/packages/react-scripts/scripts/init.js#L138
-  fs.moveSync(path.join(root, 'gitignore'), path.join(root, '.gitignore'), []);
+  // Also followed same convention for other dotfiles.
+  const dotFilesSource = path.resolve(
+    __dirname,
+    'templates',
+    'shared',
+    'dotfiles'
+  );
+
+  fs.readdirSync(dotFilesSource).map(function (fileName) {
+    return fs.copyFileSync(
+      path.join(dotFilesSource, fileName),
+      path.join(root, '.' + fileName)
+    );
+  });
 
   // Setup the manifest file
   const manifestDetails = Object.assign(
@@ -353,6 +369,9 @@ function createExtension(name, { overridePage, devtools, language }) {
   console.log();
   console.log(chalk.cyan(`  ${command} run build`));
   console.log('    Bundles the app into static files for Chrome store.');
+  console.log();
+  console.log(chalk.cyan(`  ${command} run format`));
+  console.log('    Formats all the files.');
   console.log();
   console.log('We suggest that you begin by typing:');
   console.log();

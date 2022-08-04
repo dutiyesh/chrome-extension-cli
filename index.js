@@ -90,8 +90,7 @@ function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=c
     },
     appDetails,
     {
-      private: true,
-      $schema: "https://json.schemastore.org/chrome-manifest.json"
+      private: true
     }
   );
 
@@ -111,14 +110,14 @@ function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=c
 
   // Add devDependencies
   args.push(
-    'webpack@^4.0.0',
-    'webpack-cli@^3.0.0',
-    'webpack-merge@^5.0.0',
-    'copy-webpack-plugin@^6.0.0',
-    'size-plugin@^2.0.0',
-    'mini-css-extract-plugin@^0.10.0',
-    'css-loader@^4.0.0',
-    'file-loader@^6.0.0'
+    'webpack@^5.65.0',
+    'webpack-cli@^4.9.1',
+    'webpack-merge@^5.8.0',
+    'copy-webpack-plugin@^6.4.1',
+    'size-plugin@^2.0.2',
+    'mini-css-extract-plugin@^0.10.1',
+    'css-loader@^6.5.1',
+    'file-loader@^6.2.0'
   );
 
   outputFunc('Installing packages. This might take a couple of minutes.');
@@ -165,6 +164,7 @@ function createExtension(name, { overridePage, devtools }, dirPath, outputFunc=c
     {},
     {
       name: prettifyAppName(name),
+      $schema: "https://json.schemastore.org/chrome-manifest.json"
     },
     appDetails,
   );

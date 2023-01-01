@@ -292,7 +292,7 @@ function createExtension(name, { overridePage, devtools, language }) {
 
   // Copy script to automatically generate zip file
   fs.copyFileSync(
-    path.resolve(__dirname, 'templates', 'zip.js'),
+    path.resolve(__dirname, 'templates', 'shared', 'zip.js'),
     path.join(root, 'zip.js')
   );
 

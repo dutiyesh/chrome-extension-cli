@@ -4,7 +4,7 @@ const AdmZip = require('adm-zip');
 
 const { name } = parse(__dirname);
 const { version } = JSON.parse(
-  readFileSync(resolve(__dirname, 'public', 'manifest.json'), 'utf8')
+  readFileSync(resolve(__dirname, 'build', 'manifest.json'), 'utf8')
 );
 
 const zip = new AdmZip();

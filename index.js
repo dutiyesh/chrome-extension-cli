@@ -185,8 +185,9 @@ function createExtension(name, { overridePage, devtools, language }) {
   appPackage.scripts = {
     watch:
       'webpack --mode=development --watch --config config/webpack.config.js',
-    build:
-      'webpack --mode=production --config config/webpack.config.js && node zip.js',
+    build: 'webpack --mode=production --config config/webpack.config.js',
+    pack: 'node pack.js',
+    repack: 'npm run build && npm run pack',
     format:
       'prettier --write --ignore-unknown "{config,public,src}/**/*.{html,css,js,ts,json}"',
   };
@@ -292,8 +293,8 @@ function createExtension(name, { overridePage, devtools, language }) {
 
   // Copy script to automatically generate zip file
   fs.copyFileSync(
-    path.resolve(__dirname, 'templates', 'shared', 'zip.js'),
-    path.join(root, 'zip.js')
+    path.resolve(__dirname, 'templates', 'shared', 'pack.js'),
+    path.join(root, 'pack.js')
   );
 
   // Setup the manifest file

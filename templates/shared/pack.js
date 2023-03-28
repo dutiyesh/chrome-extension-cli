@@ -7,12 +7,14 @@ const { version } = JSON.parse(
   readFileSync(resolve(__dirname, 'build', 'manifest.json'), 'utf8')
 );
 
+const outdir = 'release';
+const filename = `${base}-v${version}.zip`;
 const zip = new AdmZip();
 zip.addLocalFolder('build');
-zip.writeZip(`release/${base}-v${version}.zip`);
+zip.writeZip(`${outdir}/${filename}`);
 
 console.log(
   `${chalk.green(
     'Success!'
-  )} Created a ${base}-v${version}.zip file. You can upload this file to web store.`
+  )} Created a ${filename} file under ${outdir} directory. You can upload this file to web store.`
 );

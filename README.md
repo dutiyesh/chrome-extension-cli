@@ -27,7 +27,8 @@ Then follow these instructions to see your extension:
 3. Click on the **Load unpacked extension** button
 4. Select the folder **my-extension/build**
 
-When you're ready to publish to Chrome Web Store, create a minified bundle with `npm run build` and then zip the `build` folder.
+When you're ready to publish to Chrome Web Store, create a minified bundle with `npm run build` and pack it with `npm run pack`.
+Or you can zip the `build` folder manually.
 
 <div align="center">
   <img width="600" height="413" src="assets/installation.png" alt="Chrome Extension CLI">
@@ -106,7 +107,18 @@ Then follow these instructions to see your app:
 ### `npm run build`
 
 Builds the app for production to the build folder.<br>
-Zip the build folder and your app is ready to be published on Chrome Web Store.
+Run `npm run pack` to
+zip the build folder and your app is ready to be published on Chrome Web Store.<br>
+Or you can zip it manually.
+
+### `npm run pack`
+
+Packs the build folder into a zip file under release folder.
+
+### `npm run repack`
+
+Rebuilds and packs the app.
+It is a shorthand for `npm run build && npm run pack`.
 
 ### `npm run format`
 

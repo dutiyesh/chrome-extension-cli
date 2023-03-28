@@ -9,4 +9,4 @@ const { version } = JSON.parse(
 
 const zip = new AdmZip();
 zip.addLocalFolder('build');
-zip.writeZip(`${base}-v${version}.zip`);
+zip.writeZip(`release/${base}-v${version}.zip`);

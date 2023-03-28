@@ -10,3 +10,9 @@ const { version } = JSON.parse(
 const zip = new AdmZip();
 zip.addLocalFolder('build');
 zip.writeZip(`release/${base}-v${version}.zip`);
+
+console.log(
+  `${chalk.green(
+    'Success!'
+  )} Created a ${base}-v${version}.zip file. You can upload this file to web store.`
+);

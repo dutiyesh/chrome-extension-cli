@@ -27,7 +27,7 @@ Then follow these instructions to see your extension:
 3. Click on the **Load unpacked extension** button
 4. Select the folder **my-extension/build**
 
-When you're ready to publish to Chrome Web Store, create a minified bundle with `npm run build` and pack it with `npm run pack`.
+When you're ready to publish to Chrome Web Store, create a minified bundle with `npm run build` and zip it with `npm run pack`.
 Or you can zip the `build` folder manually.
 
 <div align="center">
@@ -117,7 +117,7 @@ Packs the build folder into a zip file under release folder.
 
 ### `npm run repack`
 
-Rebuilds and packs the app.
+Rebuilds and packs the app into a zip file.
 It is a shorthand for `npm run build && npm run pack`.
 
 ### `npm run format`

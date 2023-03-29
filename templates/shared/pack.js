@@ -17,7 +17,5 @@ if (!existsSync(outdir)) {
 zip.writeZip(`${outdir}/${filename}`);
 
 console.log(
-  `${chalk.green(
-    'Success!'
-  )} Created a ${filename} file under ${outdir} directory. You can upload this file to web store.`
+  `Success! Created a ${filename} file under ${outdir} directory. You can upload this file to web store.`
 );

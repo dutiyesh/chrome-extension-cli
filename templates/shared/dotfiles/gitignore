@@ -10,3 +10,6 @@
 .DS_Store
 
 npm-debug.log*
+
+# packed files
+/release

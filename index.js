@@ -186,6 +186,8 @@ function createExtension(name, { overridePage, devtools, language }) {
     watch:
       'webpack --mode=development --watch --config config/webpack.config.js',
     build: 'webpack --mode=production --config config/webpack.config.js',
+    pack: 'node pack.js',
+    repack: 'npm run build && npm run pack',
     format:
       'prettier --write --ignore-unknown "{config,public,src}/**/*.{html,css,js,ts,json}"',
   };
@@ -216,7 +218,8 @@ function createExtension(name, { overridePage, devtools, language }) {
     'mini-css-extract-plugin@^2.6.0',
     'css-loader@^6.7.1',
     'file-loader@^6.2.0',
-    'prettier@^2.6.2'
+    'prettier@^2.6.2',
+    'adm-zip@^0.5.10'
   );
 
   if (languageName === 'typescript') {
@@ -287,6 +290,12 @@ function createExtension(name, { overridePage, devtools, language }) {
       path.join(root, '.' + fileName)
     );
   });
+
+  // Copy script to automatically generate zip file
+  fs.copyFileSync(
+    path.resolve(__dirname, 'templates', 'shared', 'pack.js'),
+    path.join(root, 'pack.js')
+  );
 
   // Setup the manifest file
   const manifestDetails = Object.assign(

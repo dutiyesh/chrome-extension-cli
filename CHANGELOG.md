@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0 (March 30, 2023)
+
+🚀 New Feature
+- Add scripts to generate a zip file of extension [#35](https://github.com/dutiyesh/chrome-extension-cli/pull/35)
+
+---
+
 ## 1.3.0 (June 17, 2022)
 
 🚀 New Feature

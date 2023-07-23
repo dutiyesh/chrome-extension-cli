@@ -42,6 +42,7 @@ const program = new commander.Command(packageFile.name)
     '--language [language-name]',
     'language like JavaScript and TypeScript'
   )
+  .option('--latest-packages', 'download latest npm packages version')
   .on('--help', () => {
     console.log(`    Only ${chalk.green('<project-directory>')} is required.`);
   })
@@ -134,6 +135,14 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
+function extractPackageName(name) {
+  if (name.startsWith('@')) {
+    return name.slice(0, name.lastIndexOf('@'));
+  }
+
+  return name.split('@')[0];
+}
+
 function createExtension(name, { overridePage, devtools, language }) {
   const root = path.resolve(name);
   let overridePageName;
@@ -210,7 +219,7 @@ function createExtension(name, { overridePage, devtools, language }) {
   let args = ['install', '--save-dev'];
 
   // Add devDependencies
-  args.push(
+  let dependencies = [
     'webpack@^5.72.0',
     'webpack-cli@^4.9.2',
     'webpack-merge@^5.8.0',
@@ -219,12 +228,22 @@ function createExtension(name, { overridePage, devtools, language }) {
     'css-loader@^6.7.1',
     'file-loader@^6.2.0',
     'prettier@^2.6.2',
-    'adm-zip@^0.5.10'
-  );
+    'adm-zip@^0.5.10',
+  ];
 
   if (languageName === 'typescript') {
-    args.push('typescript@4.6.3', 'ts-loader@9.2.8', '@types/chrome@0.0.181');
+    dependencies.push(
+      'typescript@4.6.3',
+      'ts-loader@9.2.8',
+      '@types/chrome@0.0.181'
+    );
   }
+
+  if (program.withLatestPackages) {
+    dependencies = dependencies.map(extractPackageName);
+  }
+
+  args.push(...dependencies);
 
   console.log('Installing packages. This might take a couple of minutes.');
   console.log(

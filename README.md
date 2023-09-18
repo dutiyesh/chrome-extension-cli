@@ -15,8 +15,7 @@ The CLI for your next Chrome Extension. 🚀
 ## Quick Overview
 
 ```sh
-npm install -g chrome-extension-cli
-chrome-extension-cli my-extension
+npx chrome-extension-cli my-extension
 cd my-extension
 npm run watch
 ```

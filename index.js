@@ -38,6 +38,7 @@ const program = new commander.Command(packageFile.name)
     'override default page like New Tab, Bookmarks, or History page'
   )
   .option('--devtools', 'add features to Chrome Developer Tools')
+  .option('--side-panel', 'add features to Chrome Side Panel')
   .option(
     '--language [language-name]',
     'language like JavaScript and TypeScript'
@@ -134,7 +135,7 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools, language }) {
+function createExtension(name, { overridePage, devtools, sidePanel, language }) {
   const root = path.resolve(name);
   let overridePageName;
   let languageName = 'javascript';
@@ -247,6 +248,8 @@ function createExtension(name, { overridePage, devtools, language }) {
     templateName = 'override-page';
   } else if (devtools) {
     templateName = 'devtools';
+  } else if (sidePanel) {
+    templateName = 'side-panel';
   } else {
     templateName = 'popup';
   }
@@ -335,6 +338,13 @@ function createExtension(name, { overridePage, devtools, language }) {
     appManifest = Object.assign({}, appManifest, {
       devtools_page: 'devtools.html',
     });
+  } else if (sidePanel) {
+    appManifest = Object.assign({}, appManifest, {
+      side_panel: {
+        default_path: 'sidepanel.html',
+      },
+      permissions: ['sidePanel', 'tabs'],
+    });
   } else {
     appManifest = Object.assign({}, appManifest, {
       action: {
@@ -398,5 +408,6 @@ function createExtension(name, { overridePage, devtools, language }) {
 createExtension(projectName, {
   overridePage: program.overridePage,
   devtools: program.devtools,
+  sidePanel: program.sidePanel,
   language: program.language,
 });

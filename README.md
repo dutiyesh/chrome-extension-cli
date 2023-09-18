@@ -168,6 +168,17 @@ Add features to Chrome Developer Tools.
   </figure>
 </div>
 
+
+### Side Panel
+
+Add features to Chrome Side Panel.
+
+<div align="center">
+  <figure>
+    <img width="500" height="322" src="./assets/template-side-panel.png" alt="Side Panel template">
+  </figure>
+</div>
+
 More information about [templates](templates/README.md).
 
 ## CLI options
@@ -186,6 +197,10 @@ chrome-extension-cli my-extension --override-page=history      // Override Histo
 #### `chrome-extension-cli my-extension --devtools`
 
 Creates a Panel inside developer tools.
+
+#### `chrome-extension-cli my-extension --side-panel`
+
+Creates a Panel in the browser's side panel alongside the main content of a webpage.
 
 #### `chrome-extension-cli my-extension --language`
 

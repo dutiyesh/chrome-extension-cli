@@ -44,3 +44,18 @@ With DevTools extension you can add new features to Chrome Developer Tools.
     </figcaption>
   </figure>
 </div>
+
+---
+
+## Side Panel
+
+With Side Panel extension you can add new features to Chrome Side Panel.
+
+<div align="center">
+  <figure>
+    <img width="600" height="386" src="../assets/template-side-panel.png" alt="Side Panel template">
+    <figcaption>
+      <p>A side panel extension that provides a list of all open tabs in active window.</p>
+    </figcaption>
+  </figure>
+</div>

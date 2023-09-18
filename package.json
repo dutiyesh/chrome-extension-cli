@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-cli",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "The CLI for your next Chrome Extension.",
   "repository": "dutiyesh/chrome-extension-cli",
   "main": "index.js",
@@ -22,7 +22,8 @@
     "template",
     "popup",
     "override-page",
-    "devtools"
+    "devtools",
+    "side-panel"
   ],
   "author": {
     "name": "Dutiyesh Salunkhe",

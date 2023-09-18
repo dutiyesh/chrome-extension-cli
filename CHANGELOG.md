@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.0 (September 18, 2023)
+
+🚀 New Feature
+- Add Side Panel support [#45](https://github.com/dutiyesh/chrome-extension-cli/pull/45)
+
+---
+
 ## 1.4.0 (March 30, 2023)
 
 🚀 New Feature

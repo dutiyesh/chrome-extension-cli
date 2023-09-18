@@ -135,7 +135,10 @@ function logOptionsConflictError() {
   process.exit(1);
 }
 
-function createExtension(name, { overridePage, devtools, sidePanel, language }) {
+function createExtension(
+  name,
+  { overridePage, devtools, sidePanel, language }
+) {
   const root = path.resolve(name);
   let overridePageName;
   let languageName = 'javascript';

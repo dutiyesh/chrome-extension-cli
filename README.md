@@ -1,6 +1,17 @@
 # Chrome Extension CLI
 
-The CLI for your next Chrome Extension. 🚀
+[![npm version](https://img.shields.io/npm/v/chrome-extension-cli)](https://npmjs.com/package/chrome-extension-cli)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![Chrome Web Extension](https://img.shields.io/badge/Chrome-Web%20Extension-orange.svg)](https://developer.chrome.com/docs/extensions/)
+[![CI Status](https://github.com/theluckystrike/chrome-extension-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/theluckystrike/chrome-extension-cli/actions)
+[![Discord](https://img.shields.io/badge/Discord-Zovo-blueviolet.svg?logo=discord)](https://discord.gg/zovo)
+[![Website](https://img.shields.io/badge/Website-zovo.one-blue)](https://zovo.one)
+[![GitHub Stars](https://img.shields.io/github/stars/theluckystrike/chrome-extension-cli?style=social)](https://github.com/theluckystrike/chrome-extension-cli)
+
+> The CLI for your next Chrome Extension. 🚀
+
+Part of the [Zovo](https://zovo.one) developer tools family.
 
 <p>
   <a href="https://www.producthunt.com/posts/chrome-extension-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-chrome-extension-cli" target="_blank">
@@ -217,9 +228,45 @@ chrome-extension-cli my-extension --language=typescript    // Language TypeScrip
 
 See the [contribution guide](CONTRIBUTING.md) and join the contributors!
 
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/theluckystrike/chrome-extension-cli.git
+cd chrome-extension-cli
+
+# Install dependencies
+npm install
+
+# Link for local development
+npm link
+```
+
 ## FAQs
 
 See the [FAQs](FAQ.md).
+
+## Built by Zovo
+
+Part of the [Zovo](https://zovo.one) developer tools family — privacy-first Chrome extensions built by developers, for developers.
+
+## See Also
+
+### Related Zovo Repositories
+
+- [chrome-extension-starter-mv3](https://github.com/theluckystrike/chrome-extension-starter-mv3) - Production-ready Chrome extension template
+- [chrome-extension-utils](https://github.com/theluckystrike/chrome-extension-utils) - Utility library for extensions
+- [zovo-extension-template](https://github.com/theluckystrike/zovo-extension-template) - Privacy-first extension template
+- [chrome-storage-plus](https://github.com/theluckystrike/chrome-storage-plus) - Type-safe storage wrapper
+- [webext-bridge](https://github.com/theluckystrike/webext-bridge) - Cross-context messaging
+
+### Zovo Chrome Extensions
+
+- [Zovo Tab Manager](https://chrome.google.com/webstore/detail/zovo-tab-manager) - Manage tabs efficiently
+- [Zovo Focus](https://chrome.google.com/webstore/detail/zovo-focus) - Block distractions
+- [Zovo Permissions Scanner](https://chrome.google.com/webstore/detail/zovo-permissions-scanner) - Check extension privacy grades
+
+Visit [zovo.one](https://zovo.one) for more information.
 
 ## License
 

@@ -4,6 +4,7 @@
   "description": "The CLI for your next Chrome Extension.",
   "repository": "dutiyesh/chrome-extension-cli",
   "main": "index.js",
+  "types": "index.d.ts",
   "bin": {
     "chrome-extension-cli": "index.js"
   },

@@ -8,8 +8,6 @@
 
 The CLI for your next Chrome Extension. 🚀
 
-Part of the [Zovo](https://zovo.one) developer tools family.
-
 <p>
   <a href="https://www.producthunt.com/posts/chrome-extension-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-chrome-extension-cli" target="_blank">
     <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=170461&theme=light" alt="Chrome Extension CLI - The CLI for your next Chrome extension 🚀 | Product Hunt Embed" style="width: 200px; height: 42px;" width="200px" height="42px" />

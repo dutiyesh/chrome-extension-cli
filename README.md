@@ -1,11 +1,5 @@
 # Chrome Extension CLI
 
-[![npm version](https://img.shields.io/npm/v/chrome-extension-cli)](https://npmjs.com/package/chrome-extension-cli)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Discord](https://img.shields.io/badge/Discord-Zovo-blueviolet.svg?logo=discord)](https://discord.gg/zovo)
-[![Website](https://img.shields.io/badge/Website-zovo.one-blue)](https://zovo.one)
-[![GitHub Stars](https://img.shields.io/github/stars/theluckystrike/chrome-extension-cli?style=social)](https://github.com/theluckystrike/chrome-extension-cli)
-
 The CLI for your next Chrome Extension. 🚀
 
 <p>
@@ -236,20 +230,3 @@ Chrome Extension CLI is open source software [licensed as MIT](LICENSE).
 _Many thanks to [create-react-app](https://github.com/facebook/create-react-app/blob/master/README.md) for the inspiration with this readme file._
 
 _Jupiter Icon used in templates made by [Freepik](https://www.freepik.com/home) from [www.flaticon.com](http://www.flaticon.com/)._
-
----
-
-Built by [Zovo](https://zovo.one)
-
-### Related Zovo Repositories
-
-- [chrome-extension-starter-mv3](https://github.com/theluckystrike/chrome-extension-starter-mv3) - Production-ready Chrome extension starter with TypeScript, React, Tailwind
-- [vitesse-webext](https://github.com/theluckystrike/vitesse-webext) - Vite-powered WebExtension starter
-- [create-chrome-ext](https://github.com/theluckystrike/create-chrome-ext) - Scaffolding for Chrome extensions
-
-### Zovo Chrome Extensions
-
-- [Zovo Tab Manager](https://chrome.google.com/webstore/detail/zovo-tab-manager) - Manage tabs efficiently
-- [Zovo Focus](https://chrome.google.com/webstore/detail/zovo-focus) - Block distractions
-
-Visit [zovo.one](https://zovo.one) for more information.

@@ -1,6 +1,14 @@
 # Chrome Extension CLI
 
-The CLI for your next Chrome Extension. 🚀
+[![npm version](https://img.shields.io/npm/v/chrome-extension-cli)](https://npmjs.com/package/chrome-extension-cli)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Discord](https://img.shields.io/badge/Discord-Zovo-blueviolet.svg?logo=discord)](https://discord.gg/zovo)
+[![Website](https://img.shields.io/badge/Website-zovo.one-blue)](https://zovo.one)
+[![GitHub Stars](https://img.shields.io/github/stars/theluckystrike/chrome-extension-cli?style=social)](https://github.com/theluckystrike/chrome-extension-cli)
+
+> The CLI for your next Chrome Extension. 🚀
+
+Part of the [Zovo](https://zovo.one) developer tools family.
 
 <p>
   <a href="https://www.producthunt.com/posts/chrome-extension-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-chrome-extension-cli" target="_blank">
@@ -224,6 +232,26 @@ See the [FAQs](FAQ.md).
 ## License
 
 Chrome Extension CLI is open source software [licensed as MIT](LICENSE).
+
+## See Also
+
+### Related Zovo Repositories
+
+- [chrome-extension-starter-mv3](https://github.com/theluckystrike/chrome-extension-starter-mv3) - Production-ready Chrome extension starter template
+- [chrome-devtools-kit](https://github.com/theluckystrike/chrome-devtools-kit) - Build custom Chrome DevTools panels
+- [awesome-chrome-extensions-dev](https://github.com/theluckystrike/awesome-chrome-extensions-dev) - Curated list of Chrome extension development resources
+
+### Zovo Chrome Extensions
+
+- [Text Expander Pro](https://chrome.google.com/webstore/detail/text-expander-pro-by-zovo/) - Smart text expansion
+- [Zovo Tab Manager](https://chrome.google.com/webstore/detail/zovo-tab-manager) - Manage tabs efficiently
+- [Web Scraper Lite](https://github.com/theluckystrike/web-scraper-lite) - Free & open source web scraping
+
+Visit [zovo.one](https://zovo.one) for more information.
+
+---
+
+Built by [Zovo](https://zovo.one)
 
 ---
 
